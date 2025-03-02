@@ -4,8 +4,49 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-* {
+.spotify-player {
+  display: flex;
+  align-items: center;
+  background-color: #181818;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.player-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.album-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+}
+
+.track-info {
+  flex-grow: 1;
+}
+
+.track-info h3 {
+  font-size: 16px;
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+}
+
+.track-info p {
+  font-size: 14px;
+  margin: 0;
+  color: #b3b3b3;
+}
+
+.play-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
