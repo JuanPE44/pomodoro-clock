@@ -80,13 +80,19 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
   // 🚀 Verifica que Spotify permita el control del player
   useEffect(() => {
     fetch("https://api.spotify.com/v1/me/player", {
-      headers: { Authorization: `Bearer ${token}` },
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        device_ids: [player?._options.id],
+        play: true,
+      }),
     })
       .then((res) => res.json())
-      .then((data) => console.log("Estado del Player:", data))
-      .catch((err) =>
-        console.error("Error obteniendo el estado del player:", err)
-      );
+      .then((data) => console.log("Activando player:", data))
+      .catch((err) => console.error("Error activando el player:", err));
   }, [token]);
 
   // 🔄 Función para volver a autenticar si hay error de permisos
@@ -97,6 +103,9 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
       "user-read-playback-state",
       "user-modify-playback-state",
       "streaming",
+      "user-read-currently-playing",
+      "user-library-read",
+      "app-remote-control",
     ].join("%20");
 
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=token&show_dialog=true`;
@@ -125,10 +134,11 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
           </button>
         </div>
       ) : (
-        <p>Conectando a Spotify...</p>
+        <div>
+          <button onClick={() => player?.connect()}>🔄 Iniciar Player</button>
+          <button onClick={reauthenticate}>🔑 Re-autenticar Spotify</button>
+        </div>
       )}
-      <button onClick={() => player?.connect()}>🔄 Iniciar Player</button>
-      <button onClick={reauthenticate}>🔑 Re-autenticar Spotify</button>
     </div>
   );
 };
