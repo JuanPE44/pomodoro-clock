@@ -1,116 +1,24 @@
-import React, { useEffect, useState } from "react";
+import { IconSpotify } from "../icons/IconSpotify";
+import { IconPause } from "../icons/IconPause";
+import { IconPlay } from "../icons/IconPlay";
+import { IconNext } from "../icons/IconNext";
+import { useSpotifyPlayer } from "../hooks/useSpotifyPlayer";
 
 interface SpotifyPlayerProps {
   token: string;
 }
 
 const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
-  const [player, setPlayer] = useState<Spotify.Player | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [track, setTrack] = useState<{
-    name: string;
-    artist: string;
-    cover: string;
-  } | null>(null);
-  const [isPremium, setIsPremium] = useState<boolean | null>(null);
-
-  // 🚀 Verificar si la cuenta es Premium
-  useEffect(() => {
-    fetch("https://api.spotify.com/v1/me", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Tipo de cuenta:", data.product);
-        setIsPremium(data.product === "premium");
-      })
-      .catch((err) => console.error("Error verificando cuenta:", err));
-  }, [token]);
-
-  useEffect(() => {
-    if (!window.Spotify) {
-      const script = document.createElement("script");
-      script.src = "https://sdk.scdn.co/spotify-player.js";
-      script.async = true;
-      document.body.appendChild(script);
-    }
-
-    window.onSpotifyWebPlaybackSDKReady = () => {
-      const newPlayer = new window.Spotify.Player({
-        name: "Pomodoro Player",
-        getOAuthToken: (cb) => cb(token),
-        volume: 0.5,
-      });
-
-      newPlayer.addListener("player_state_changed", (state) => {
-        if (!state) return;
-
-        setIsPlaying(!state.paused);
-        setTrack({
-          name: state.track_window.current_track.name,
-          artist: state.track_window.current_track.artists[0].name,
-          cover: state.track_window.current_track.album.images[0].url,
-        });
-      });
-
-      newPlayer.addListener("ready", ({ device_id }) => {
-        console.log("Player ready, device ID:", device_id);
-      });
-
-      newPlayer.addListener("not_ready", ({ device_id }) => {
-        console.log("Player not ready, device ID:", device_id);
-      });
-
-      newPlayer.connect().then((success) => {
-        if (success) {
-          console.log("Spotify Player conectado");
-        } else {
-          console.error("Error al conectar el Spotify Player");
-        }
-      });
-
-      newPlayer.addListener("account_error", ({ message }) => {
-        console.error("Error de cuenta:", message);
-      });
-
-      setPlayer(newPlayer);
-    };
-  }, [token]);
-
-  // 🚀 Verifica que Spotify permita el control del player
-  useEffect(() => {
-    fetch("https://api.spotify.com/v1/me/player", {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        device_ids: [player?._options.id],
-        play: true,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("Activando player:", data))
-      .catch((err) => console.error("Error activando el player:", err));
-  }, [token]);
-
-  // 🔄 Función para volver a autenticar si hay error de permisos
-  const reauthenticate = () => {
-    const CLIENT_ID = "1feb12dea42d4d64892be526df4f1989";
-    const REDIRECT_URI = "http://localhost:5173/";
-    const SCOPES = [
-      "user-read-playback-state",
-      "user-modify-playback-state",
-      "streaming",
-      "user-read-currently-playing",
-      "user-library-read",
-      "app-remote-control",
-    ].join("%20");
-
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=token&show_dialog=true`;
-    window.location.href = authUrl;
-  };
+  const {
+    isPremium,
+    track,
+    device,
+    previousTrack,
+    togglePlay,
+    nextTrack,
+    isPlaying,
+    setActiveDevice,
+  } = useSpotifyPlayer({ token });
 
   if (isPremium === false) {
     return (
@@ -121,23 +29,57 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
   }
 
   return (
-    <div className="spotify-player">
+    <div className="bg-neutral-800 p-3 rounded-2xl w-full">
       {track ? (
-        <div className="player-content">
-          <img src={track.cover} alt="Album cover" className="album-cover" />
-          <div className="track-info">
-            <h3>{track.name}</h3>
-            <p>{track.artist}</p>
+        <div className="flex items-center w-full gap-2">
+          <img
+            src={track.cover}
+            alt="Album cover"
+            className="w-14 h-14 rounded-2xl"
+          />
+          <div className="flex-1 flex flex-col gap-1">
+            <div className="flex gap-2 items-center justify-between">
+              <div className="flex gap-1 items-center">
+                <IconSpotify width={12} height={12} />
+                <span className="text-xs text-neutral-300">{device?.name}</span>
+              </div>
+              {device?.name != "Pomodoro Player" && (
+                <button
+                  className="rounded-2xl text-xs px-2 py-[2px] bg-[#1ed760] ml-2 font-bold text-neutral-800 cursor-pointer"
+                  onClick={setActiveDevice}
+                >
+                  Use this device
+                </button>
+              )}
+            </div>
+            <div className="flex justify-between gap-1">
+              <div>
+                <h3 className="font-medium limited-text">{track.name}</h3>
+                <p className="text-xs text-neutral-400">{track.artist}</p>
+              </div>
+              <div className="flex space-x-4 items-center">
+                <button
+                  className="rotate-y-180 cursor-pointer"
+                  onClick={previousTrack}
+                >
+                  <IconNext width={15} height={15} />
+                </button>
+                <button onClick={togglePlay} className="cursor-pointer">
+                  {isPlaying ? (
+                    <IconPause width={18} height={18} />
+                  ) : (
+                    <IconPlay width={18} height={18} />
+                  )}
+                </button>
+                <button className="cursor-pointer" onClick={nextTrack}>
+                  <IconNext width={15} height={15} />
+                </button>
+              </div>
+            </div>
           </div>
-          <button onClick={() => player?.togglePlay()} className="play-btn">
-            {isPlaying ? "⏸️" : "▶️"}
-          </button>
         </div>
       ) : (
-        <div>
-          <button onClick={() => player?.connect()}>🔄 Iniciar Player</button>
-          <button onClick={reauthenticate}>🔑 Re-autenticar Spotify</button>
-        </div>
+        <div className="my-4">conectando...</div>
       )}
     </div>
   );

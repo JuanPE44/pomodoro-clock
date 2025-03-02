@@ -1,3 +1,4 @@
+import { IconMenu } from "../icons/IconMenu";
 import { IconSpotify } from "../icons/IconSpotify";
 import SpotifyLogin from "./SpotifyLogin";
 import SpotifyPlayer from "./SpotifyPlayer";
@@ -8,19 +9,19 @@ interface Props {
 }
 export function Spotify({ token, logout }: Props) {
   return (
-    <div className="p-4 text-white bg-neutral-500 min-h-60 rounded-2xl">
+    <div className="p-2 text-white bg-neutral-500  rounded-2xl">
       {!token ? (
         <SpotifyLogin />
       ) : (
         <div className="flex flex-col gap-3 items-start">
           <div className="flex justify-between w-full items-center">
-            <IconSpotify />
-            <button
+            <IconSpotify type={2} />
+            <div
               onClick={logout}
-              className="px-4 py-2 bg-red-500 rounded-2xl"
+              className="cursor-pointer hover:bg-neutral-400 rounded-sm p-1"
             >
-              Cerrar sesión
-            </button>
+              <IconMenu />
+            </div>
           </div>
           <SpotifyPlayer token={token} />
         </div>

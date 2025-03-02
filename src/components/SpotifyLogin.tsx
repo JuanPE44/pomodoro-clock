@@ -1,9 +1,11 @@
+import { IconSpotify } from "../icons/IconSpotify";
+
 const CLIENT_ID = "1feb12dea42d4d64892be526df4f1989";
 const REDIRECT_URI = "http://localhost:5173/callback";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const SCOPES =
-  "user-read-playback-state user-modify-playback-state streaming user-read-private";
+  "user-read-playback-state user-modify-playback-state streaming user-read-private user-read-recently-played user-read-currently-playing";
 
 const SpotifyLogin = () => {
   const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}&show_dialog=true`;
@@ -11,7 +13,10 @@ const SpotifyLogin = () => {
   return (
     <div>
       <a href={loginUrl}>
-        <button>Iniciar sesión con Spotify</button>
+        <button className="bg-[#1ed760] px-4 py-2 cursor-pointer hover:scale-105 transition-transform rounded-2xl flex space-x-2 items-center">
+          <span className="font-bold">Iniciar sesión</span>{" "}
+          <IconSpotify width={20} height={20} />
+        </button>
       </a>
     </div>
   );
