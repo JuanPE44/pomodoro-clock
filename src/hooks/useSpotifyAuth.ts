@@ -11,6 +11,7 @@ const useSpotifyAuth = () => {
       axios
         .get("https://api.spotify.com/v1/me", {
           headers: { Authorization: `Bearer ${token}` },
+          params: { robustness: "medium" },
         })
         .then((res) => console.log("Usuario:", res.data))
         .catch(() => {

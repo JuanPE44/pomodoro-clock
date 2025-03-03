@@ -8,14 +8,13 @@ const SCOPES =
   "user-read-playback-state user-modify-playback-state streaming user-read-private user-read-recently-played user-read-currently-playing";
 
 const SpotifyLogin = () => {
-  const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}&show_dialog=true`;
-
+  const loginUrl = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=${RESPONSE_TYPE}&show_dialog=true&robustness=medium`;
   return (
     <div>
       <a href={loginUrl}>
-        <button className="bg-[#1ed760] px-4 py-2 cursor-pointer hover:scale-105 transition-transform rounded-2xl flex space-x-2 items-center">
-          <span className="font-bold">Iniciar sesión</span>{" "}
-          <IconSpotify width={20} height={20} />
+        <button className="border border-[#1ed760] text-[#1ed760] px-4 py-2 cursor-pointer hover:scale-105 transition-transform rounded-2xl flex space-x-2 items-center">
+          <span className="font-medium">Iniciar sesión</span>{" "}
+          <IconSpotify width={20} height={20} color="#1ed760" />
         </button>
       </a>
     </div>

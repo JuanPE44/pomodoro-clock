@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getPlayerData } from "../services/getPlayerData";
 
 interface Props {
   token: string;
@@ -89,32 +90,6 @@ export const useSpotifyPlayer = ({ token }: Props) => {
     };
   }, [token]);
 
-  // 🎯 Polling para mantener sincronizado el dispositivo activo
-  useEffect(() => {
-    if (!token) return;
-
-    const interval = setInterval(() => {
-      fetch("https://api.spotify.com/v1/me/player", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data.device) {
-            setDevice({
-              id: data.device.id,
-              name: data.device.name,
-              type: data.device.type,
-            });
-          }
-        })
-        .catch((err) =>
-          console.error("Error obteniendo el dispositivo activo:", err)
-        );
-    }, 5000); // Cada 5 segundos
-
-    return () => clearInterval(interval);
-  }, [token]);
-
   // 🚀 Verificar si la cuenta es Premium
   useEffect(() => {
     fetch("https://api.spotify.com/v1/me", {
@@ -132,75 +107,25 @@ export const useSpotifyPlayer = ({ token }: Props) => {
   useEffect(() => {
     if (!token) return;
 
-    fetch("https://api.spotify.com/v1/me/player", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data && data.device) {
-          setDevice({
-            id: data.device.id,
-            name: data.device.name,
-            type: data.device.type,
-          });
-        }
-      })
-      .catch((err) =>
-        console.error("Error obteniendo el dispositivo actual:", err)
-      );
-  }, [token]);
+    const fetchDevice = async () => {
+      const data = await getPlayerData(token);
+      if (data) {
+        setDevice(data.device);
+        setDevice({
+          id: data.device.id,
+          name: data.device.name,
+          type: data.device.type,
+        });
+        setTrack({
+          name: data.item.name,
+          artist: data.item.artists[0].name,
+          cover: data.item.album.images[0].url,
+        });
+        setIsPlaying(data.is_playing);
+      }
+    };
 
-  useEffect(() => {
-    if (!token) return;
-
-    fetch("https://api.spotify.com/v1/me/player/currently-playing", {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => {
-        if (res.status === 204 || res.status === 401) {
-          console.log("No hay canción en reproducción o token inválido");
-          return null;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data && data.item) {
-          setTrack({
-            name: data.item.name,
-            artist: data.item.artists[0].name,
-            cover: data.item.album.images[0].url,
-          });
-          setIsPlaying(data.is_playing);
-        } else {
-          // Si no hay una canción en reproducción, buscamos la última escuchada
-          fetch(
-            "https://api.spotify.com/v1/me/player/recently-played?limit=1",
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          )
-            .then((res) => res.json())
-            .then((recentData) => {
-              if (recentData.items.length > 0) {
-                const lastTrack = recentData.items[0].track;
-                setTrack({
-                  name: lastTrack.name,
-                  artist: lastTrack.artists[0].name,
-                  cover: lastTrack.album.images[0].url,
-                });
-              }
-            })
-            .catch((err) =>
-              console.error(
-                "Error obteniendo la última canción reproducida:",
-                err
-              )
-            );
-        }
-      })
-      .catch((err) =>
-        console.error("Error obteniendo la canción en reproducción:", err)
-      );
+    fetchDevice();
   }, [token]);
 
   // Función para poner la app como dispositivo principal
@@ -241,37 +166,31 @@ export const useSpotifyPlayer = ({ token }: Props) => {
   };
 
   const togglePlay = () => {
-    if (!deviceId) return; // Asegurar que hay un deviceId
-
-    fetch(
-      `https://api.spotify.com/v1/me/player/${isPlaying ? "pause" : "play"}`,
-      {
-        method: "PUT",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
-      .then(() => setIsPlaying(!isPlaying)) // Cambiar el estado después de la acción
-      .catch((err) =>
-        console.error("Error al cambiar el estado de reproducción:", err)
-      );
+    player?.togglePlay().then(() => {
+      console.log("Toggled playback!");
+    });
   };
 
   const previousTrack = () => {
-    fetch("https://api.spotify.com/v1/me/player/previous", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-    }).catch((err) =>
-      console.error("Error al volver a la canción anterior:", err)
-    );
+    player
+      ?.previousTrack()
+      .then(() => {
+        console.log("Canción anterior reproducida");
+      })
+      .catch((error) => {
+        console.error("Error al pasar a la canción anterior:", error);
+      });
   };
 
   const nextTrack = () => {
-    fetch("https://api.spotify.com/v1/me/player/next", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-    }).catch((err) =>
-      console.error("Error al pasar a la siguiente canción:", err)
-    );
+    player
+      ?.nextTrack()
+      .then(() => {
+        console.log("Canción siguiente reproducida");
+      })
+      .catch((error) => {
+        console.error("Error al avanzar a la siguiente canción:", error);
+      });
   };
 
   return {
