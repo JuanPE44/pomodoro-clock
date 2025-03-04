@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+@theme static {
+  --color-spotify: #1ed760;
+  --color-card: #181818dd;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }

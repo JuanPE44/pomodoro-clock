@@ -1,5 +1,5 @@
 import { Spotify } from "./Spotify";
-import { Pomodoro } from "./Pomodoro"
+import { Pomodoro } from "./Pomodoro";
 
 interface Props {
   token: string | null;
@@ -10,9 +10,7 @@ export function FocusSessions({ token, logout }: Props) {
     <div className="flex-1 bg-neutral-700 p-7">
       <div className="grid grid-cols-2 gap-4 p-5 items-start max-w-[900px]">
         <div className="grid gap-4">
-          <div className="bg-neutral-500 h-70 rounded-2xl ">
-            <Pomodoro />
-          </div>
+          <Pomodoro />
           <div className="bg-neutral-500 h-72 rounded-2xl"></div>
         </div>
         <div className="grid gap-4">
