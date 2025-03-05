@@ -10,8 +10,8 @@ interface Props {
 }
 export function Spotify({ token, logout }: Props) {
   return (
-    <Card>
-      <div className="flex justify-between w-full items-center">
+    <Card className="flex flex-col gap-2">
+      <header className="flex justify-between w-full items-center">
         <IconSpotify type={2} />
         <DropdownMenu>
           <li className="hover:bg-[#18181844] rounded-sm px-2 ">
@@ -22,7 +22,7 @@ export function Spotify({ token, logout }: Props) {
             )}
           </li>
         </DropdownMenu>
-      </div>
+      </header>
       {!token ? (
         <div className="p-8 text-center flex flex-col items-center gap-5">
           <p className="text-sm text-neutral-200">

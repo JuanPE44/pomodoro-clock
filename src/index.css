@@ -3,6 +3,7 @@
 @theme static {
   --color-spotify: #1ed760;
   --color-card: #181818dd;
+  --color-primary: #ff0080;
 }
 
 :root {
