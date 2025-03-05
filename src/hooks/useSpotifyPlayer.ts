@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { getPlayerData } from "../services/getPlayerData";
-import { activateDevice } from "../services/activeDevice";
 import { getIsPremium } from "../services/getIsPremium";
+import { putActiveDevice } from "../services/putActiveDevice";
+import { getPlayerData } from "../services/getPlayerData";
+import { useFetchDevice } from "./useFetchDevice";
 
 interface Props {
   token: string;
@@ -21,10 +22,11 @@ export const useSpotifyPlayer = ({ token }: Props) => {
     type: string;
   } | null>();
   const [deviceId, setDeviceId] = useState<string | null>(null);
-  const [isPremium, setIsPremium] = useState<boolean>(false);
+  const [isPremium, setIsPremium] = useState<boolean | null>(null);
+  const [isLoadingDevice, setIsLoadingDevice] = useState(false);
 
   const fetchDevice = useCallback(async () => {
-    const data = await getPlayerData(token);
+    const data = await getPlayerData(token, setIsLoadingDevice);
     const isPremium = await getIsPremium(token);
 
     if (!isPremium) return;
@@ -41,47 +43,21 @@ export const useSpotifyPlayer = ({ token }: Props) => {
   }, [token]);
 
   const setActiveDevice = async () => {
-    if (!token) return;
-
-    if (device) {
-      const activatedDevice = await activateDevice(token, deviceId);
-      if (activatedDevice) {
-        console.log("Dispositivo activado:", activatedDevice);
-      } else {
-        console.log("No se pudo activar el dispositivo.");
-      }
-    } else {
-      console.log("No se encontraron dispositivos disponibles.");
-    }
+    await putActiveDevice(token, deviceId, setIsLoadingDevice);
   };
 
   const togglePlay = () => {
-    player?.togglePlay().then(() => {
-      console.log("Toggled playback!");
-    });
+    player?.togglePlay();
   };
 
   const previousTrack = () => {
-    player
-      ?.previousTrack()
-      .then(() => {
-        console.log("Canción anterior reproducida");
-      })
-      .catch((error) => {
-        console.error("Error al pasar a la canción anterior:", error);
-      });
+    player?.previousTrack();
   };
 
   const nextTrack = () => {
-    player
-      ?.nextTrack()
-      .then(() => {
-        console.log("Canción siguiente reproducida");
-      })
-      .catch((error) => {
-        console.error("Error al avanzar a la siguiente canción:", error);
-      });
+    player?.nextTrack();
   };
+
   useEffect(() => {
     if (!window.Spotify) {
       const script = document.createElement("script");
@@ -102,7 +78,7 @@ export const useSpotifyPlayer = ({ token }: Props) => {
 
         setIsPlaying(!state.paused);
         setTrack({
-          name: state.track_window.current_track.name,
+          name: state.track_window.current_track?.name,
           artist: state.track_window.current_track.artists[0].name,
           cover: state.track_window.current_track.album.images[0].url,
         });
@@ -121,10 +97,7 @@ export const useSpotifyPlayer = ({ token }: Props) => {
       });
 
       newPlayer.addListener("ready", ({ device_id }) => {
-        console.log("Player ready, device ID:", device_id);
-        setDeviceId(device_id); // Guardar el device_id en el estado
-
-        // Llamar a fetchDevice cuando el player esté listo
+        setDeviceId(device_id);
         fetchDevice();
       });
 
@@ -143,17 +116,12 @@ export const useSpotifyPlayer = ({ token }: Props) => {
       newPlayer.on("account_error", ({ message }) => {
         console.error("Failed to validate Spotify account", message);
       });
-
+      newPlayer.connect();
       setPlayer(newPlayer);
     };
-
-    const intervalId = setInterval(() => {
-      fetchDevice();
-    }, 5000);
-
-    return () => clearInterval(intervalId);
   }, [token, fetchDevice]); // Aquí dependemos de `fetchDevice`
 
+  useFetchDevice(fetchDevice, 3000);
   return {
     player,
     setPlayer,
@@ -165,5 +133,6 @@ export const useSpotifyPlayer = ({ token }: Props) => {
     device,
     isPremium,
     setActiveDevice,
+    isLoadingDevice,
   };
 };

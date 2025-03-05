@@ -3,6 +3,7 @@ import { IconPause } from "../icons/IconPause";
 import { IconPlay } from "../icons/IconPlay";
 import { IconNext } from "../icons/IconNext";
 import { useSpotifyPlayer } from "../hooks/useSpotifyPlayer";
+import { Spinner } from "./Spinner";
 
 interface SpotifyPlayerProps {
   token: string;
@@ -18,6 +19,7 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
     nextTrack,
     isPlaying,
     setActiveDevice,
+    isLoadingDevice,
   } = useSpotifyPlayer({ token });
 
   if (isPremium === false) {
@@ -42,7 +44,9 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
               <div className="flex gap-1 items-center">
                 <IconSpotify width={12} height={12} />
                 <span className="text-xs text-neutral-300">
-                  {device ? device.name : "Other device"}
+                  {!isLoadingDevice
+                    ? device && device.name
+                    : "Changing device..."}
                 </span>
               </div>
               {device?.name != "Pomodoro Player" && (
@@ -61,7 +65,8 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
               </div>
               <div
                 className={`flex space-x-4 items-center ${
-                  device?.name != "Pomodoro Player" &&
+                  (device?.name != "Pomodoro Player" ||
+                    isLoadingDevice == true) &&
                   "grayscale filter pointer-events-none"
                 }`}
               >
@@ -86,7 +91,9 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
           </div>
         </div>
       ) : (
-        <div className="my-4">conectando...</div>
+        <div className="p-5 w-full flex justify-center">
+          <Spinner />
+        </div>
       )}
     </div>
   );

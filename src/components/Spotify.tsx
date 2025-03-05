@@ -1,6 +1,7 @@
 import { IconSpotify } from "../icons/IconSpotify";
 import { Card } from "./Card";
 import DropdownMenu from "./DropdownMenu";
+import { SpotifyAlbums } from "./SpotifyAlbums";
 import SpotifyLogin from "./SpotifyLogin";
 import SpotifyPlayer from "./SpotifyPlayer";
 
@@ -33,6 +34,7 @@ export function Spotify({ token, logout }: Props) {
       ) : (
         <div className="flex flex-col gap-3 items-start">
           <SpotifyPlayer token={token} />
+          <SpotifyAlbums token={token} />
         </div>
       )}
     </Card>
