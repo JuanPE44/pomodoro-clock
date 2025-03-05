@@ -1,4 +1,4 @@
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/ui/NavBar";
 import useSpotifyAuth from "./hooks/useSpotifyAuth";
 import AppRoutes from "./routes/routes";
 import { BrowserRouter } from "react-router-dom";

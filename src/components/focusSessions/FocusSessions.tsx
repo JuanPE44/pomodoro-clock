@@ -1,6 +1,6 @@
-import { Spotify } from "./Spotify";
-import { Pomodoro } from "./Pomodoro";
-import { Tasks } from "./Tasks";
+import { Pomodoro } from "./pomodoro/Pomodoro";
+import { Spotify } from "./spotify/Spotify";
+import { Tasks } from "./tasks/Tasks";
 
 interface Props {
   token: string | null;

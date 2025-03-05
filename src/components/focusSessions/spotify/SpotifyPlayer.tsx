@@ -1,9 +1,9 @@
-import { IconSpotify } from "../icons/IconSpotify";
-import { IconPause } from "../icons/IconPause";
-import { IconPlay } from "../icons/IconPlay";
-import { IconNext } from "../icons/IconNext";
-import { useSpotifyPlayer } from "../hooks/useSpotifyPlayer";
-import { Spinner } from "./Spinner";
+import { useSpotifyPlayer } from "../../../hooks/useSpotifyPlayer";
+import { IconNext } from "../../../icons/IconNext";
+import { IconPause } from "../../../icons/IconPause";
+import { IconPlay } from "../../../icons/IconPlay";
+import { IconSpotify } from "../../../icons/IconSpotify";
+import { Spinner } from "../../ui/Spinner";
 
 interface SpotifyPlayerProps {
   token: string;

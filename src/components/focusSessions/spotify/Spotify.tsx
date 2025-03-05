@@ -1,6 +1,6 @@
-import { IconSpotify } from "../icons/IconSpotify";
-import { Card } from "./Card";
-import DropdownMenu from "./DropdownMenu";
+import { IconSpotify } from "../../../icons/IconSpotify";
+import { Card } from "../../ui/Card";
+import DropdownMenu from "../../ui/DropdownMenu";
 import { SpotifyAlbums } from "./SpotifyAlbums";
 import SpotifyLogin from "./SpotifyLogin";
 import SpotifyPlayer from "./SpotifyPlayer";

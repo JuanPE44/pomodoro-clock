@@ -1,6 +1,6 @@
-import { IconTasks } from "../icons/IconTasks";
-import { Card } from "./Card";
-import DropdownMenu from "./DropdownMenu";
+import { IconTasks } from "../../../icons/IconTasks";
+import { Card } from "../../ui/Card";
+import DropdownMenu from "../../ui/DropdownMenu";
 
 export function Tasks() {
   return (

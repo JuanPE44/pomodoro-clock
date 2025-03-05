@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Callback from "../components/Callback";
-import { FocusSessions } from "../components/FocusSessions";
+import { FocusSessions } from "../components/focusSessions/FocusSessions";
 
 interface RoutesProps {
   token: string | null;

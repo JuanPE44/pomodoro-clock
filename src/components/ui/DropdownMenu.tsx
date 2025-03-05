@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconMenu } from "../icons/IconMenu";
+import { IconMenu } from "../../icons/IconMenu";
 
 interface Props {
   children: React.ReactNode;

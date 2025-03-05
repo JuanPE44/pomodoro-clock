@@ -1,8 +1,8 @@
 import { useState, useRef } from "react";
-import { Card } from "./Card";
 import { PomoClock } from "./PomoClock";
-import { IconArrowDown } from "../icons/IconArrowDown";
-import { IconArrowUp } from "../icons/IconArrowUp";
+import { Card } from "../../ui/Card";
+import { IconArrowUp } from "../../../icons/IconArrowUp";
+import { IconArrowDown } from "../../../icons/IconArrowDown";
 
 const MAX_TIME: number = 240;
 const MIN_TIME: number = 0;

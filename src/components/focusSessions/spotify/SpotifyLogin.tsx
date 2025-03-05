@@ -1,5 +1,5 @@
-import { loginUrl } from "../config/spotify";
-import { IconSpotify } from "../icons/IconSpotify";
+import { loginUrl } from "../../../config/spotify";
+import { IconSpotify } from "../../../icons/IconSpotify";
 
 const SpotifyLogin = () => {
   return (
