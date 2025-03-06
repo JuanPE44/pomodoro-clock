@@ -82,7 +82,8 @@ export function Tasks() {
               <input
                 type="text"
                 placeholder="Add task"
-                className="w-full bg-neutral-700 px-2 py-1 border-b-task   border-b rounded-md"
+                autoFocus={isFocus}
+                className="w-full bg-neutral-800 px-2 py-1 border-b-task border-b rounded-md outline-none"
               />
             </form>
           )}
