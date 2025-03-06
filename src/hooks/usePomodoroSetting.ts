@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import Alarm from "../sounds/Alarm.mp3";
 
 const MAX_TIME: number = 240;
 const MIN_TIME: number = 0;
@@ -11,6 +12,13 @@ export function usePomodoroSetting() {
   const [inSesion, setInSesion] = useState(false);
   const [pause, setPause] = useState(false);
 
+  
+  const reproducirAlarma = () => {
+    const audio = new Audio(Alarm); // Usa el archivo importado
+    audio.play();
+  };
+    
+
   const startTimer = () => {
     if (intervalRef.current) return;
     if (time <= 0) return;
@@ -21,6 +29,7 @@ export function usePomodoroSetting() {
     intervalRef.current = setInterval(() => {
       setTime((prevTime) => {
         if (prevTime <= 1) {
+          reproducirAlarma();
           clearInterval(intervalRef.current);
           intervalRef.current = null;
           setInSesion(false);
@@ -42,7 +51,7 @@ export function usePomodoroSetting() {
     if (intervalRef.current) return;
 
     if (time < MAX_TIME && operator === "+") {
-      setTime(time + 5);
+      setTime(time + 1);
     } else if (time > MIN_TIME && operator === "-") {
       setTime(time - 5);
     }
