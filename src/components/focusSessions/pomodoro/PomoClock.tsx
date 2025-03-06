@@ -24,57 +24,52 @@ export function PomoClock({
   startTimer: () => void;
   stopTimer: () => void;
 }) {
-
   const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
   const intervalRef = useRef<number | null>(null);
   const [handsClockIndex, setHandsClockIndex] = useState(0);
 
   const countDown = () => {
-    if (intervalRef.current) return; 
+    if (intervalRef.current) return;
 
     intervalRef.current = setInterval(() => {
-      console.log(handsClockIndex)
+      console.log(handsClockIndex);
       setHandsClockIndex((prevIndex) => prevIndex + 1);
     }, timeDiff);
   };
 
   useEffect(() => {
-    countDown(); 
+    countDown();
 
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
-        intervalRef.current = null; 
+        intervalRef.current = null;
       }
     };
-  }, []);
-
-
-
-
+  }, [countDown]);
 
   return (
     <div className="h-full flex flex-col items-center justify-center">
-      <div className="w-50 h-50 rounded-full bg-[#4f4f5256] m-10 flex items-center justify-center relative shadow-sm shadow-[#a8a8ab33]">
+      <div className="w-64 h-64 rounded-full bg-[#4f4f5256] m-10 flex items-center justify-center relative shadow-sm shadow-[#a8a8ab33]">
         <div className="h-[10%] flex flex-row items-end justify-center">
-          <div className="text-white text-2xl mr-1 top-2 flex">{time}</div>
-          <div className="text-white text-sm">minutos</div>
+          <div className="text-white text-5xl mr-1 top-2 flex">{time}</div>
+          <div className="text-neutral-100 text-xl">min</div>
         </div>
-        <div className="absolute">
+        <div className="absolute h-full w-full top-0 left-0">
           {Array.from({ length: CANT_LINES }, (_, index) => (
             <div
               key={index}
-              className="h-1 w-1 absolute top-1/2 left-1/2"
-              style={{ transform: `rotate(${DEGREE_DIFFERENCE * index + 270}deg)` }}
+              className="h-full w-full absolute flex justify-center items-center p-4 top-0 left-0"
+              style={{
+                transform: `rotate(${DEGREE_DIFFERENCE * index + 180}deg)`,
+              }}
             >
-              <div className="h-23 w-1 relative flex items-end">
-                {
-                  index === handsClockIndex ? (
-                    <div className="h-3 w-1 bg-[#737773fe] rounded-sm" />
-                  ) : (
-                    <div className="h-3 w-1 bg-[#6d736d4d] rounded-sm" />
-                  )
-                }
+              <div className="h-1 w-full relative flex items-end">
+                {index <= handsClockIndex ? (
+                  <div className="h-2 w-6 bg-primary rounded-sm" />
+                ) : (
+                  <div className="h-2 w-6 bg-[#6d736d4d] rounded-sm" />
+                )}
               </div>
             </div>
           ))}

@@ -1,18 +1,33 @@
+import { IconConfig } from "../../icons/IconConfig";
 import { IconFocus } from "../../icons/IconFocus";
+import NavBarLink from "./NavBarLink";
 
 export function NavBar() {
   return (
-    <header className="bg-neutral-900 h-creen pt-10 px-1">
+    <header className="bg-neutral-900 h-creen p-1 flex flex-col justify-between">
       <ul>
         <li>
-          <a
-            href="/"
-            className="flex items-center gap-2 pr-18 py-1 bg-neutral-800 rounded-sm"
-          >
-            <div className="h-4 w-1 bg-primary"></div>
-            <IconFocus />
-            <span className="text-white hidden sm:block">Focus sessions</span>
-          </a>
+          <h1 className="text-xs px-4 text-white font-bold py-1">
+            Pomodoro Clock
+          </h1>
+        </li>
+        <li>
+          <NavBarLink
+            text="Focus session"
+            url="/"
+            current={true}
+            children={<IconFocus />}
+          />
+        </li>
+      </ul>
+
+      <ul>
+        <li>
+          <NavBarLink
+            text="Settings"
+            url="/settings"
+            children={<IconConfig />}
+          />
         </li>
       </ul>
     </header>

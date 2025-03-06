@@ -23,7 +23,7 @@ export function PomoSettings({
           </p>
         </div>
 
-        <div className="w-[50%] h-[22%] m-5 bg-[#242323] flex flex-row justify-center items-center shadow-sm rounded-[3px] border-b border-white hover:brightness-125 hover:rounded-[5px] overflow-hidden">
+        <div className="w-[50%] h-[22%] m-5 bg-neutral-800 flex flex-row justify-center items-center shadow-sm rounded-sm border-b border-white hover:brightness-125 hover:rounded-md overflow-hidden">
           <div className="w-[70%] h-full flex text-white items-center justify-center flex-col hover:bg-[#5c5c5c] hover:opacity-40">
             <div className="text-xl">{time}</div>
             <div className="text-xs">min</div>

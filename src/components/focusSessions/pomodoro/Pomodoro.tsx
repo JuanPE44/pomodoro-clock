@@ -4,7 +4,8 @@ import { PomoSettings } from "./PomoSettings";
 import { usePomodoroSetting } from "../../../hooks/usePomodoroSetting";
 
 export function Pomodoro() {
-  const {startTimer,
+  const {
+    startTimer,
     stopTimer,
     modifyTime,
     setPause,
@@ -12,8 +13,8 @@ export function Pomodoro() {
     startTime,
     time,
     inSesion,
-    pause } = usePomodoroSetting();
-  
+    pause,
+  } = usePomodoroSetting();
 
   return (
     <Card className="h-96 flex flex-col justify-start items-center relative overflow-hidden">
@@ -28,10 +29,11 @@ export function Pomodoro() {
           stopTimer={stopTimer}
         />
       ) : (
-          <PomoSettings 
-          time={time} 
-          modifyTime={modifyTime} 
-          startTimer={startTimer} />
+        <PomoSettings
+          time={time}
+          modifyTime={modifyTime}
+          startTimer={startTimer}
+        />
       )}
     </Card>
   );

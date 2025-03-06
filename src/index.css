@@ -5,10 +5,46 @@
   --color-card: #4447;
   --color-task: #ff0080;
   --color-primary: #55d6fd;
+  --color-scroll: #55d6fd88;
 }
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  overflow: hidden;
+
+  /* Estilos para el scroll */
+
+  /* Barra de scroll */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+    background-color: #262626;
+  }
+
+  /* Botón de subir y bajar */
+  ::-webkit-scrollbar-button {
+    background-color: #646464;
+    border-radius: 5px;
+  }
+
+  /* Barra de scroll activa */
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-scroll);
+    border-radius: 5px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Espacio entre la barra de scroll y el contenido */
+  ::-webkit-scrollbar-track {
+    background-color: #262626;
+    border-radius: 5px;
+  }
+
+  /* Estilos para el corner */
+  ::-webkit-scrollbar-corner {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
 }
 
 .limited-text {
