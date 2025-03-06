@@ -16,6 +16,7 @@ export function Spotify({ token, logout }: Props) {
         <IconSpotify type={2} />
         <DropdownMenu>
           <li className="hover:bg-[#18181844] rounded-sm px-2 ">
+            <li className="hover:bg-[#18181844] rounded-sm px-2 ">Opciones</li>
             {token && (
               <button onClick={logout} className="text-xs w-max cursor-pointer">
                 Cerrar sesion

@@ -2,8 +2,8 @@
 
 @theme static {
   --color-spotify: #1ed760;
-  --color-card: #181818dd;
-  --color-primary: #ff0080;
+  --color-card: #4447;
+  --color-task: #ff0080;
 }
 
 :root {
@@ -15,4 +15,31 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #666;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--color-task);
+  border: transparent;
+}
+
+input[type="checkbox"]:checked::before {
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  font-weight: bold;
+  color: #222;
 }

@@ -7,7 +7,7 @@ interface Props {
 export default function DropdownMenu({ children }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="relative">
+    <div className="relative shadow-2xl">
       <div
         className="hover:bg-neutral-700 rounded-sm p-1 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
