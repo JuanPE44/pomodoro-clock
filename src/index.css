@@ -4,6 +4,7 @@
   --color-spotify: #1ed760;
   --color-card: #4447;
   --color-task: #ff0080;
+  --color-primary: #55d6fd;
 }
 
 :root {
@@ -12,6 +13,7 @@
 
 .limited-text {
   width: 150px;
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
