@@ -1,6 +1,8 @@
 import { IconArrowDown } from "../../../icons/IconArrowDown";
 import { IconArrowUp } from "../../../icons/IconArrowUp";
 
+
+
 export function PomoSettings({
   time,
   modifyTime,
@@ -10,6 +12,9 @@ export function PomoSettings({
   modifyTime: (operator: string) => void;
   startTimer: () => void;
 }) {
+
+  ; 
+
   return (
     <>
       <div className="h-full flex flex-col justify-between items-center relative overflow-hidden">

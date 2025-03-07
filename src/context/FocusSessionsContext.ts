@@ -1,8 +1,15 @@
 import { createContext } from "react";
 
 interface FocusSesionsContextType {
-  points: number;
-  updatePoints: () => void;
+  startTimer: () => void;
+  stopTimer: () => void;
+  modifyTime: (operator: string) => void;
+  setPause: React.Dispatch<React.SetStateAction<boolean>>;
+  setInSesion: React.Dispatch<React.SetStateAction<boolean>>;
+  startTime: number;
+  time: number
+  inSesion: boolean
+  pause: boolean
 }
 
 // Creamos el contexto con valores por defecto

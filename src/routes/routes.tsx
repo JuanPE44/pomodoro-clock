@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, } from "react-router-dom";
 import React from "react";
 import Callback from "../components/Callback";
 import FocusSessions from "../components/focusSessions/FocusSessions";
@@ -12,7 +12,7 @@ interface RoutesProps {
 
 const AppRoutes: React.FC<RoutesProps> = ({ token, setToken, logout }) => {
   return (
-    <BrowserRouter>
+    
       <Routes>
         <Route
           path="/"
@@ -21,7 +21,7 @@ const AppRoutes: React.FC<RoutesProps> = ({ token, setToken, logout }) => {
         <Route path="/callback" element={<Callback setToken={setToken} />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
-    </BrowserRouter>
+   
   );
 };
 

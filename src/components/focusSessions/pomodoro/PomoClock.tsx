@@ -1,16 +1,17 @@
+import { CANT_LINES, DEGREE_DIFFERENCE } from "../../../config/pomoclock";
 import { IconBack } from "../../../icons/IconBack";
 import { IconPausePomo } from "../../../icons/IconPausePomo";
 import { IconPlayPomo } from "../../../icons/IconPlayPomo";
 import { IconSetting } from "../../../icons/IconSetting";
 import { useRef, useState, useEffect } from "react";
 
-const CANT_LINES: number = 25;
-const DEGREE_DIFFERENCE: number = 360 / CANT_LINES;
+
 
 export function PomoClock({
   time,
   startTime,
   pause,
+  handsClockIndex,
   setPause,
   setInSesion,
   startTimer,
@@ -19,34 +20,14 @@ export function PomoClock({
   time: number;
   startTime: number;
   pause: boolean;
+  handsClockIndex: number;
   setPause: React.Dispatch<React.SetStateAction<boolean>>;
   setInSesion: (state: boolean) => void;
   startTimer: () => void;
   stopTimer: () => void;
 }) {
-  const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
-  const intervalRef = useRef<number | null>(null);
-  const [handsClockIndex, setHandsClockIndex] = useState(0);
 
-  const countDown = () => {
-    if (intervalRef.current) return;
-
-    intervalRef.current = setInterval(() => {
-      console.log(handsClockIndex);
-      setHandsClockIndex((prevIndex) => prevIndex + 1);
-    }, timeDiff);
-  };
-
-  useEffect(() => {
-    countDown();
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-    };
-  }, [countDown]);
+  
 
   return (
     <div className="h-full flex flex-col items-center justify-center">

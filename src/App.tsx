@@ -1,3 +1,4 @@
+import { BrowserRouter } from "react-router-dom";
 import { NavBar } from "./components/ui/NavBar";
 import { FocusSessionsProvider } from "./context/FocusSessionsProvider";
 import useSpotifyAuth from "./hooks/useSpotifyAuth";
@@ -7,10 +8,12 @@ function App() {
   const { logout, token, setToken } = useSpotifyAuth();
   return (
     <div className="min-h-screen flex ">
-      <NavBar />
-      <FocusSessionsProvider>
-        <AppRoutes logout={logout} token={token} setToken={setToken} />
-      </FocusSessionsProvider>
+      <BrowserRouter>
+        <NavBar />
+        <FocusSessionsProvider>
+          <AppRoutes logout={logout} token={token} setToken={setToken} />
+        </FocusSessionsProvider>
+      </BrowserRouter>
     </div>
   );
 }

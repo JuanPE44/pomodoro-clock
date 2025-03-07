@@ -1,7 +1,7 @@
 import { PomoClock } from "./PomoClock";
 import { Card } from "../../ui/Card";
 import { PomoSettings } from "./PomoSettings";
-import { usePomodoroSetting } from "../../../hooks/usePomodoroSetting";
+import { useFocusSessionsContext } from "../../../hooks/useFocusSessionsContext";
 
 export function Pomodoro() {
   const {
@@ -10,11 +10,12 @@ export function Pomodoro() {
     modifyTime,
     setPause,
     setInSesion,
+    handsClockIndex,
     startTime,
     time,
     inSesion,
     pause,
-  } = usePomodoroSetting();
+  } = useFocusSessionsContext();
 
   return (
     <Card className="h-96 flex flex-col justify-start items-center relative overflow-hidden">
@@ -25,6 +26,7 @@ export function Pomodoro() {
           pause={pause}
           setPause={setPause}
           setInSesion={setInSesion}
+          handsClockIndex={handsClockIndex}
           startTimer={startTimer}
           stopTimer={stopTimer}
         />
