@@ -2,7 +2,7 @@
 export const putActiveDevice = async (
   token: string,
   deviceId: string | null,
-  setLoading: (loading: boolean) => void
+  setLoading: (loading: boolean) => void,
 ) => {
   if (!deviceId) return null;
 

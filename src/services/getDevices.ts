@@ -7,7 +7,7 @@ export const getDevices = async (token: string) => {
       "https://api.spotify.com/v1/me/player/devices",
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
 
     return devicesData.devices.length > 0

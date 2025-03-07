@@ -3,7 +3,7 @@ import { getLastPlayedTrack } from "./getLastPlayedTrack";
 
 export const getPlayerData = async (
   token: string,
-  setLoading: (loading: boolean) => void
+  setLoading: (loading: boolean) => void,
 ) => {
   try {
     const { data } = await axios.get("https://api.spotify.com/v1/me/player", {

@@ -1,3 +1,3 @@
 export function Alarm() {
-  return <div></div>
+  return <div></div>;
 }

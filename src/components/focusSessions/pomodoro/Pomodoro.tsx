@@ -18,7 +18,7 @@ export function Pomodoro() {
   } = useFocusSessionsContext();
 
   return (
-    <Card className="h-96 flex flex-col justify-start items-center relative overflow-hidden">
+    <Card className="relative flex h-96 flex-col items-center justify-start overflow-hidden">
       {inSesion ? (
         <PomoClock
           time={time}

@@ -31,17 +31,17 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
   }
 
   return (
-    <div className="bg-neutral-800 filter backdrop-blur-md p-3 rounded-2xl w-full">
+    <div className="w-full rounded-2xl bg-neutral-800 p-3 filter backdrop-blur-md">
       {track ? (
-        <div className="flex items-center w-full gap-2">
+        <div className="flex w-full items-center gap-2">
           <img
             src={track.cover}
             alt="Album cover"
-            className="w-14 h-14 rounded-2xl"
+            className="h-14 w-14 rounded-2xl"
           />
-          <div className="flex-1 flex flex-col gap-1">
-            <div className="flex gap-2 items-center justify-between">
-              <div className="flex gap-1 items-center">
+          <div className="flex flex-1 flex-col gap-1">
+            <div className="flex items-center justify-between gap-2">
+              <div className="flex items-center gap-1">
                 <IconSpotify width={12} height={12} />
                 <span className="text-xs text-neutral-300">
                   {!isLoadingDevice
@@ -51,7 +51,7 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
               </div>
               {device?.name != "Pomodoro Player" && (
                 <button
-                  className="rounded-2xl text-xs px-2 py-[2px] bg-[#1ed760] ml-2 font-bold text-neutral-800 cursor-pointer"
+                  className="ml-2 cursor-pointer rounded-2xl bg-[#1ed760] px-2 py-[2px] text-xs font-bold text-neutral-800"
                   onClick={setActiveDevice}
                 >
                   Use this device
@@ -60,14 +60,14 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
             </div>
             <div className="flex justify-between gap-1">
               <div>
-                <h3 className="font-medium limited-text">{track.name}</h3>
+                <h3 className="limited-text font-medium">{track.name}</h3>
                 <p className="text-xs text-neutral-400">{track.artist}</p>
               </div>
               <div
-                className={`flex space-x-4 items-center ${
+                className={`flex items-center space-x-4 ${
                   (device?.name != "Pomodoro Player" ||
                     isLoadingDevice == true) &&
-                  "grayscale filter pointer-events-none"
+                  "pointer-events-none grayscale filter"
                 }`}
               >
                 <button
@@ -91,7 +91,7 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
           </div>
         </div>
       ) : (
-        <div className="p-5 w-full flex justify-center">
+        <div className="flex w-full justify-center p-5">
           <Spinner />
         </div>
       )}

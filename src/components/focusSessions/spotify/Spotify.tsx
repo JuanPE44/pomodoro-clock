@@ -12,13 +12,13 @@ interface Props {
 export function Spotify({ token, logout }: Props) {
   return (
     <Card className="flex flex-col gap-2">
-      <header className="flex justify-between w-full items-center">
+      <header className="flex w-full items-center justify-between">
         <IconSpotify type={2} />
         <DropdownMenu>
-          <li className="hover:bg-[#18181844] rounded-sm px-2 ">
-            <li className="hover:bg-[#18181844] rounded-sm px-2 ">Opciones</li>
+          <li className="rounded-sm px-2 hover:bg-[#18181844]">
+            <li className="rounded-sm px-2 hover:bg-[#18181844]">Opciones</li>
             {token && (
-              <button onClick={logout} className="text-xs w-max cursor-pointer">
+              <button onClick={logout} className="w-max cursor-pointer text-xs">
                 Cerrar sesion
               </button>
             )}
@@ -26,14 +26,14 @@ export function Spotify({ token, logout }: Props) {
         </DropdownMenu>
       </header>
       {!token ? (
-        <div className="p-8 text-center flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5 p-8 text-center">
           <p className="text-sm text-neutral-200">
             Enhance your focus with music and podcasts from Spotify
           </p>
           <SpotifyLogin />
         </div>
       ) : (
-        <div className="flex flex-col gap-3 items-start">
+        <div className="flex flex-col items-start gap-3">
           <SpotifyPlayer token={token} />
           <SpotifyAlbums token={token} />
         </div>

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useSpotifyAuth = () => {
   const [token, setToken] = useState<string | null>(
-    localStorage.getItem("spotify_token")
+    localStorage.getItem("spotify_token"),
   );
 
   useEffect(() => {

@@ -11,7 +11,7 @@ export const getRecommendedAlbums = async (token: string) => {
         params: {
           limit: 6,
         },
-      }
+      },
     );
 
     const albums = response.data.playlists.items;

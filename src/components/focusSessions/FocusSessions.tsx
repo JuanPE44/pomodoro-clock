@@ -11,7 +11,7 @@ interface Props {
 function FocusSessions({ token, logout }: Props) {
   return (
     <ContainerSection>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 items-start max-w-[900px]">
+      <div className="grid max-w-[900px] grid-cols-1 items-start gap-4 p-5 md:grid-cols-2">
         <div className="grid gap-4">
           <Pomodoro />
           <Tasks />

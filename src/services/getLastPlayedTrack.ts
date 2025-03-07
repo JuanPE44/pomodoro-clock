@@ -5,14 +5,14 @@ import { putActiveDevice } from "./putActiveDevice";
 // 🔹 Obtener la última canción escuchada
 export const getLastPlayedTrack = async (
   token: string,
-  setIsLoading: (loading: boolean) => void
+  setIsLoading: (loading: boolean) => void,
 ) => {
   try {
     const { data } = await axios.get(
       "https://api.spotify.com/v1/me/player/recently-played?limit=1",
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
 
     if (data.items.length === 0) {

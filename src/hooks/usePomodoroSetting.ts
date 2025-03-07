@@ -2,33 +2,28 @@ import { useState, useRef, useEffect } from "react";
 import Alarm from "../sounds/Alarm.mp3";
 import { CANT_LINES, MAX_TIME, MIN_TIME } from "../config/pomoclock";
 
-
-
 export function usePomodoroSetting() {
-
   const [time, setTime] = useState(MIN_TIME);
   const [startTime, setStartTime] = useState(MIN_TIME);
   const intervalRef = useRef<number | null>(null);
   const [inSesion, setInSesion] = useState(false);
   const [pause, setPause] = useState(false);
 
-    const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
-    const intervalClockHands = useRef<number | null>(null);
-    const [handsClockIndex, setHandsClockIndex] = useState(0);
+  const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
+  const intervalClockHands = useRef<number | null>(null);
+  const [handsClockIndex, setHandsClockIndex] = useState(0);
 
-  
-    useEffect(() => {
-      return () => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        if (intervalClockHands.current) clearInterval(intervalClockHands.current);
-      };
-    }, []);
+  useEffect(() => {
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (intervalClockHands.current) clearInterval(intervalClockHands.current);
+    };
+  }, []);
 
   const reproducirAlarma = () => {
     const audio = new Audio(Alarm); // Usa el archivo importado
     audio.play();
   };
-    
 
   const startTimer = () => {
     if (intervalRef.current) return;
@@ -60,14 +55,14 @@ export function usePomodoroSetting() {
     }
   };
 
-   const countDown = () => {
-      if (intervalClockHands.current) return;
-  
-      intervalClockHands.current = setInterval(() => {
-        console.log(handsClockIndex);
-        setHandsClockIndex((prevIndex) => prevIndex + 1);
-      }, timeDiff);
-    };
+  const countDown = () => {
+    if (intervalClockHands.current) return;
+
+    intervalClockHands.current = setInterval(() => {
+      console.log(handsClockIndex);
+      setHandsClockIndex((prevIndex) => prevIndex + 1);
+    }, timeDiff);
+  };
 
   const modifyTime = (operator: string) => {
     if (intervalRef.current) return;
@@ -79,18 +74,16 @@ export function usePomodoroSetting() {
     }
   };
 
-  
-
-    return {
-       startTimer,
-       stopTimer,
-       modifyTime,
-       setPause,
-       setInSesion,
-       startTime,
-       handsClockIndex,
-       time,
-       inSesion,
-       pause
-    };
+  return {
+    startTimer,
+    stopTimer,
+    modifyTime,
+    setPause,
+    setInSesion,
+    startTime,
+    handsClockIndex,
+    time,
+    inSesion,
+    pause,
+  };
 }

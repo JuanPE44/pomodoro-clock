@@ -39,33 +39,33 @@ export function Tasks() {
 
   return (
     <Card className="min-h-60">
-      <header className="flex justify-between w-full items-center">
+      <header className="flex w-full items-center justify-between">
         <div className="flex items-center gap-0.5">
           <IconTasks color="var(--color-task)" />
           <span className="font-semibold">Tasks</span>
         </div>
-        <div className="flex gap-1 items-center">
+        <div className="flex items-center gap-1">
           <div
-            className="hover:bg-neutral-700 rounded-sm p-1 cursor-pointer"
+            className="cursor-pointer rounded-sm p-1 hover:bg-neutral-700"
             onClick={() => setIsFocus(!isFocus)}
           >
             <IconPlus />
           </div>
           <DropdownMenu>
-            <li className="hover:bg-[#18181844] rounded-sm px-2 ">Opciones</li>
+            <li className="rounded-sm px-2 hover:bg-[#18181844]">Opciones</li>
           </DropdownMenu>
         </div>
       </header>
       {tasks.length === 0 && !isFocus ? (
-        <div className="p-8 text-center flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center gap-5 p-8 text-center">
           <div className="flex flex-col gap-2">
-            <h3 className="font-semibold text-xl">Stay on track</h3>
+            <h3 className="text-xl font-semibold">Stay on track</h3>
             <p className="text-sm text-neutral-200">
               Add tasks and assign then to focus sessions throughout your day
             </p>
           </div>
           <button
-            className="flex gap-1 items-center px-3 py-1 bg-neutral-700 rounded-sm curson-pointer"
+            className="curson-pointer flex items-center gap-1 rounded-sm bg-neutral-700 px-3 py-1"
             onClick={() => setIsFocus(!isFocus)}
           >
             <IconPlus />
@@ -73,7 +73,7 @@ export function Tasks() {
           </button>
         </div>
       ) : (
-        <div className="py-2 flex flex-col gap-2">
+        <div className="flex flex-col gap-2 py-2">
           <p className="text-xs text-neutral-400">
             Select a task for your focus session
           </p>
@@ -83,7 +83,7 @@ export function Tasks() {
                 type="text"
                 placeholder="Add task"
                 autoFocus={isFocus}
-                className="w-full bg-neutral-800 px-2 py-1 border-b-task border-b rounded-md outline-none"
+                className="border-b-task w-full rounded-md border-b bg-neutral-800 px-2 py-1 outline-none"
               />
             </form>
           )}
@@ -91,18 +91,18 @@ export function Tasks() {
             return (
               <div
                 key={task.id}
-                className="flex items-center w-full bg-neutral-700 p-2 border border-neutral-600 rounded-md"
+                className="flex w-full items-center rounded-md border border-neutral-600 bg-neutral-700 p-2"
               >
                 <input
                   type="checkbox"
                   checked={task.completed}
                   value={task.id}
                   onChange={(e) => handleOnChange(e)}
-                  className="w-4 h-4 rounded-full  text-task outline-none p "
+                  className="text-task p h-4 w-4 rounded-full outline-none"
                 />
                 <label
                   className={`ms-2 text-sm font-medium text-neutral-100 ${
-                    task.completed && "line-through text-neutral-400"
+                    task.completed && "text-neutral-400 line-through"
                   }`}
                 >
                   {task.title}

@@ -9,13 +9,13 @@ export default function DropdownMenu({ children }: Props) {
   return (
     <div className="relative shadow-2xl">
       <div
-        className="hover:bg-neutral-700 rounded-sm p-1 cursor-pointer"
+        className="cursor-pointer rounded-sm p-1 hover:bg-neutral-700"
         onClick={() => setIsOpen(!isOpen)}
       >
         <IconMenu />
       </div>
       <ul
-        className={`absolute top-8 -right-8 flex-col gap-2 bg-neutral-700 rounded-md p-1 ${
+        className={`absolute top-8 -right-8 flex-col gap-2 rounded-md bg-neutral-700 p-1 ${
           isOpen ? "flex" : "hidden"
         }`}
       >

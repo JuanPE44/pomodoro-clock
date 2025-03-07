@@ -7,7 +7,7 @@ import AppRoutes from "./routes/routes";
 function App() {
   const { logout, token, setToken } = useSpotifyAuth();
   return (
-    <div className="min-h-screen flex ">
+    <div className="flex min-h-screen">
       <BrowserRouter>
         <NavBar />
         <FocusSessionsProvider>

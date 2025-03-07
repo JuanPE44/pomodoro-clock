@@ -4,10 +4,10 @@ import NavBarLink from "./NavBarLink";
 
 export function NavBar() {
   return (
-    <header className="bg-neutral-900 h-creen p-1 flex flex-col justify-between">
+    <header className="h-creen flex flex-col justify-between bg-neutral-900 p-1">
       <ul>
         <li>
-          <h1 className="text-xs px-4 text-white font-bold py-1">
+          <h1 className="px-4 py-1 text-xs font-bold text-white">
             Pomodoro Clock
           </h1>
         </li>
