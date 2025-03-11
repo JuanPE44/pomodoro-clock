@@ -39,14 +39,15 @@ function Settings() {
             </div>
 
             {openFocus && (
-              <div className="absolute top-[70%] left-0 mt-1 flex h-[65%] w-full scale-100 flex-col items-center rounded-sm opacity-100  animate-open-options">
-                <div  className="bg-card mb-0.5 flex h-[50%] w-full items-center rounded-sm pl-10 text-sm text-white">
+              <div className="animate-open-options absolute top-[70%] left-0 mt-1 flex h-[65%] w-full scale-100 flex-col items-center rounded-sm opacity-100">
+                <div className="bg-card mb-0.5 flex h-[50%] w-full items-center rounded-sm pl-10 text-sm text-white">
                   <div>Periodo de Enfoque</div>
-
                 </div>
                 <div className="bg-card flex h-[50%] w-full items-center rounded-sm pl-10 text-sm text-white">
                   <div className="w-1/3">Periodo de Descanso</div>
-                  <div className="w-full flex items-center justify-end m-10"><OpenConfig></OpenConfig></div>
+                  <div className="m-10 flex w-full items-center justify-end">
+                    <OpenConfig></OpenConfig>
+                  </div>
                 </div>
               </div>
             )}

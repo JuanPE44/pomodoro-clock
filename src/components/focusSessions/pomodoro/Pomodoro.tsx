@@ -3,6 +3,7 @@ import { Card } from "../../ui/Card";
 import { PomoSettings } from "./PomoSettings";
 import { useFocusSessionsContext } from "../../../hooks/useFocusSessionsContext";
 
+
 export function Pomodoro() {
   const {
     startTimer,
@@ -17,6 +18,7 @@ export function Pomodoro() {
     pause,
   } = useFocusSessionsContext();
 
+  
   return (
     <Card className="relative flex h-96 flex-col items-center justify-start overflow-hidden">
       {inSesion ? (

@@ -1,9 +1,11 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, } from "react";
 import Alarm from "../sounds/Alarm.mp3";
 import { CANT_LINES, MAX_TIME, MIN_TIME } from "../config/pomoclock";
+import { useSettingContext } from "./useSettingContext";
 
 export function usePomodoroSetting() {
-  const [time, setTime] = useState(MIN_TIME);
+  const {preferenceFocusTime} = useSettingContext();
+  const [time, setTime] = useState(preferenceFocusTime);
   const [startTime, setStartTime] = useState(MIN_TIME);
   const intervalRef = useRef<number | null>(null);
   const [inSesion, setInSesion] = useState(false);
@@ -12,6 +14,10 @@ export function usePomodoroSetting() {
   const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
   const intervalClockHands = useRef<number | null>(null);
   const [handsClockIndex, setHandsClockIndex] = useState(0);
+
+  useEffect(() => {
+    setTime(preferenceFocusTime);
+  }, [preferenceFocusTime]);
 
   useEffect(() => {
     return () => {
