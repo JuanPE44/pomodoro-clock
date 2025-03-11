@@ -7,20 +7,19 @@
   --color-task: #ff0080;
   --color-primary: #55d6fd;
   --color-scroll: #55d6fd88;
+  --color-pomodoro: #4f4f5256;
 
   /* Animaciones */
-  --animate-open-options: open-options .3s ease-in-out forwards;
+  --animate-open-options: open-options 0.3s ease-in-out forwards;
 
   @keyframes open-options {
     0% {
       transform: translateY(-50%);
       opacity: 0;
-      
     }
     100% {
       transform: translateY(0%);
       opacity: 1;
-      
     }
   }
 }
@@ -28,7 +27,7 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   overflow: hidden;
-  
+
   /* Estilos para el scroll */
 
   /* Barra de scroll */

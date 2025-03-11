@@ -23,21 +23,21 @@ export function PomoSettings({
           </p>
         </div>
 
-        <div className="m-5 flex h-[22%] w-[50%] flex-row items-center justify-center overflow-hidden rounded-sm border-b border-white bg-neutral-800 shadow-sm hover:rounded-md hover:brightness-125">
-          <div className="flex h-full w-[70%] flex-col items-center justify-center text-white hover:bg-[#5c5c5c] hover:opacity-40">
-            <div className="text-xl">{time}</div>
-            <div className="text-xs">min</div>
+        <div className="bg-pomodoro m-5 flex flex-row items-center justify-center overflow-hidden rounded-sm border-b border-white shadow-sm hover:rounded-md hover:brightness-125">
+          <div className="flex h-full flex-col items-center justify-center gap-1 p-8 text-center text-white hover:bg-[#5c5c5c] hover:opacity-40">
+            <span className="text-4xl">{time}</span>
+            <span className="text-xs text-neutral-200">mins</span>
           </div>
-          <div className="flex h-full w-[30%] flex-col items-center justify-center">
+          <div className="flex h-full flex-col items-center justify-center">
             <button
               onClick={() => modifyTime("+")}
-              className="flex h-1/2 w-full items-center justify-center border-b border-l border-[#5c5c5c] text-white hover:bg-[#5c5c5c] hover:opacity-40"
+              className="flex h-1/2 w-full items-center justify-center border-b border-l border-[#5c5c5c] p-3 text-white hover:bg-[#5c5c5c] hover:opacity-40"
             >
               <IconArrowUp />
             </button>
             <button
               onClick={() => modifyTime("-")}
-              className="flex h-1/2 w-full items-center justify-center border-l border-[#5c5c5c] text-white hover:bg-[#5c5c5c] hover:opacity-40"
+              className="flex h-1/2 w-full items-center justify-center border-l border-[#5c5c5c] p-3 text-white hover:bg-[#5c5c5c] hover:opacity-40"
             >
               <IconArrowDown />
             </button>

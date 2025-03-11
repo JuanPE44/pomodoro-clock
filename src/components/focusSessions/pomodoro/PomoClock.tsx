@@ -3,11 +3,9 @@ import { IconBack } from "../../../icons/IconBack";
 import { IconPausePomo } from "../../../icons/IconPausePomo";
 import { IconPlayPomo } from "../../../icons/IconPlayPomo";
 import { IconSetting } from "../../../icons/IconSetting";
-import { useRef, useState, useEffect } from "react";
 
 export function PomoClock({
   time,
-  startTime,
   pause,
   handsClockIndex,
   setPause,
@@ -25,11 +23,11 @@ export function PomoClock({
   stopTimer: () => void;
 }) {
   return (
-    <div className="flex h-full flex-col items-center justify-center">
-      <div className="relative m-10 flex h-64 w-64 items-center justify-center rounded-full bg-[#4f4f5256] shadow-sm shadow-[#a8a8ab33]">
-        <div className="flex h-[10%] flex-row items-end justify-center">
-          <div className="top-2 mr-1 flex text-5xl text-white">{time}</div>
-          <div className="text-xl text-neutral-100">min</div>
+    <div className="flex h-full flex-col items-center justify-center gap-6">
+      <div className="bg-pomodoro relative flex h-64 w-64 items-center justify-center rounded-full shadow-sm shadow-[#a8a8ab33]">
+        <div className="flex flex-row items-end justify-center gap-1">
+          <div className="flex text-5xl text-white">{time}</div>
+          <div className="text-xl text-neutral-200">min</div>
         </div>
         <div className="absolute top-0 left-0 h-full w-full">
           {Array.from({ length: CANT_LINES }, (_, index) => (
@@ -51,38 +49,43 @@ export function PomoClock({
           ))}
         </div>
       </div>
-      <div className="flex flex-row items-center justify-center">
-        <button
-          className="m-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-black"
-          onClick={() => {
-            setPause((prev) => {
-              if (prev) {
-                startTimer();
-              } else {
+      <div className="z-50 flex flex-col items-center gap-1">
+        <div className="flex flex-row items-center justify-center gap-2">
+          <button
+            className="bg-primary flex cursor-pointer items-center justify-center rounded-full p-2 text-black transition duration-200 ease-in-out hover:scale-105"
+            onClick={() => {
+              setPause((prev) => {
+                if (prev) {
+                  startTimer();
+                } else {
+                  stopTimer();
+                }
+                return !prev;
+              });
+            }}
+          >
+            {pause ? (
+              <IconPlayPomo width={15} height={15} color="black" />
+            ) : (
+              <IconPausePomo width={15} height={15} color="black" />
+            )}
+          </button>
+          {pause && (
+            <button
+              className="bg-pomodoro flex cursor-pointer items-center justify-center rounded-full p-2 transition duration-200 ease-in-out hover:scale-105"
+              onClick={() => {
+                setInSesion(false);
                 stopTimer();
-              }
-              return !prev;
-            });
-          }}
-        >
-          {pause ? (
-            <IconPlayPomo width={15} height={15} color="black" />
-          ) : (
-            <IconPausePomo width={15} height={15} color="black" />
+              }}
+            >
+              <IconBack width={15} height={15} color="#fff" />
+            </button>
           )}
-        </button>
-        <button
-          className="m-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-black"
-          onClick={() => {
-            setInSesion(false);
-            stopTimer();
-          }}
-        >
-          <IconBack width={15} height={15} color="black" />
-        </button>
-        <button className="m-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-black">
-          <IconSetting width={15} height={15} color="black" />
-        </button>
+          <button className="bg-pomodoro flex cursor-pointer items-center justify-center rounded-full p-2 transition duration-200 ease-in-out hover:scale-105">
+            <IconSetting width={15} height={15} color="#fff" />
+          </button>
+        </div>
+        {pause && <p className="py-3 text-xs text-neutral-300">Paused</p>}
       </div>
     </div>
   );
