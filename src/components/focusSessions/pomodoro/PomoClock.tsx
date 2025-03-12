@@ -8,8 +8,10 @@ export function PomoClock({
   time,
   pause,
   handsClockIndex,
+  startTime,
   setPause,
   setInSesion,
+  setTime,
   startTimer,
   stopTimer,
 }: {
@@ -17,6 +19,7 @@ export function PomoClock({
   startTime: number;
   pause: boolean;
   handsClockIndex: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
   setPause: React.Dispatch<React.SetStateAction<boolean>>;
   setInSesion: (state: boolean) => void;
   startTimer: () => void;
@@ -75,6 +78,8 @@ export function PomoClock({
               className="bg-pomodoro flex cursor-pointer items-center justify-center rounded-full p-2 transition duration-200 ease-in-out hover:scale-105"
               onClick={() => {
                 setInSesion(false);
+                setTime(startTime);
+                setPause(false);
                 stopTimer();
               }}
             >

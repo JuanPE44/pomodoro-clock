@@ -6,6 +6,7 @@ interface FocusSesionsContextType {
   modifyTime: (operator: string) => void;
   setPause: React.Dispatch<React.SetStateAction<boolean>>;
   setInSesion: React.Dispatch<React.SetStateAction<boolean>>;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
   handsClockIndex: number;
   startTime: number;
   time: number;

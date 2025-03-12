@@ -10,10 +10,28 @@ export function usePomodoroSetting() {
   const intervalRef = useRef<number | null>(null);
   const [inSesion, setInSesion] = useState(false);
   const [pause, setPause] = useState(false);
-
-  const timeDiff = (startTime / CANT_LINES) * 60 * 1000;
   const intervalClockHands = useRef<number | null>(null);
   const [handsClockIndex, setHandsClockIndex] = useState(0);
+
+  useEffect(() => { 
+    if (!inSesion) {
+      console.log(time, "time");
+      setStartTime(time); 
+    }
+  }, [inSesion, time]); 
+  
+  
+  useEffect(() => {
+    if (inSesion) {
+      console.log("Entrando a la sesión", startTime); 
+      countDown(startTime); 
+    } else {
+      console.log("Saliendo de la sesión"); 
+      setHandsClockIndex(0); 
+    }
+  }, [inSesion]);
+
+
 
   useEffect(() => {
     setTime(preferenceFocusTime);
@@ -35,9 +53,8 @@ export function usePomodoroSetting() {
     if (intervalRef.current) return;
     if (time <= 0) return;
 
-    setStartTime(time);
     setInSesion(true);
-    countDown();
+
 
     intervalRef.current = setInterval(() => {
       setTime((prevTime) => {
@@ -61,13 +78,17 @@ export function usePomodoroSetting() {
     }
   };
 
-  const countDown = () => {
-    if (intervalClockHands.current) return;
+  const countDown = (currentTime : number) => {
+    if (intervalClockHands.current) {
+      clearInterval(intervalClockHands.current); 
+    }
+    const timeDiffLines = ((currentTime / CANT_LINES) * 60 * 1000);
+    console.log("tiempo de diferrencia entre lineas", timeDiffLines)
 
     intervalClockHands.current = setInterval(() => {
-      console.log(handsClockIndex);
+      console.log("index reloj",handsClockIndex);
       setHandsClockIndex((prevIndex) => prevIndex + 1);
-    }, timeDiff);
+    }, timeDiffLines);
   };
 
   const modifyTime = (operator: string) => {
@@ -80,12 +101,15 @@ export function usePomodoroSetting() {
     }
   };
 
+ 
+
   return {
     startTimer,
     stopTimer,
     modifyTime,
     setPause,
     setInSesion,
+    setTime,
     startTime,
     handsClockIndex,
     time,

@@ -10,6 +10,7 @@ export function Pomodoro() {
     modifyTime,
     setPause,
     setInSesion,
+    setTime,
     handsClockIndex,
     startTime,
     time,
@@ -30,6 +31,7 @@ export function Pomodoro() {
             pause={pause}
             setPause={setPause}
             setInSesion={setInSesion}
+            setTime={setTime}
             handsClockIndex={handsClockIndex}
             startTimer={startTimer}
             stopTimer={stopTimer}

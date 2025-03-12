@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { IconArrowDown } from "../../icons/IconArrowDown";
 import clsx from "clsx";
-import { optionsFocusTime } from "../../config/pomoclock";
-import { useSettingContext } from "../../hooks/useSettingContext";
 
-export function OpenConfig() {
-  const { setPreferenceFocusTime, preferenceFocusTime, } = useSettingContext();
 
+interface Props {
+  optionSetting: { [key: number]: string };
+  setPreference: React.Dispatch<React.SetStateAction<number>>;
+  preferenceTime : number;
+}
+
+export function OpenConfig({optionSetting, setPreference, preferenceTime}: Props) {
+  
   const [isOpen, setIsOpen] = useState(false);
 
 
@@ -19,13 +23,13 @@ export function OpenConfig() {
       onClick={() => setIsOpen(!isOpen)}
     >
       {isOpen ? (
-        Object.entries(optionsFocusTime).map(([key, value]) => (
+        Object.entries(optionSetting).map(([key, value]) => (
           <div
             key={key}
-            onClick={() => setPreferenceFocusTime(parseInt(value, 10))}
+            onClick={() => setPreference(parseInt(value, 10))}
             className="h-8 w-full cursor-pointer p-1"
           >
-            {parseInt(value, 10) == preferenceFocusTime ? (
+            {parseInt(value, 10) == preferenceTime ? (
               <div className="bg-card flex h-full w-full items-center justify-start rounded-sm ">
                 <div className="w-1 h-[60%] bg-primary rounded-sm "/>
                 <div className="w-full flex items-center justify-center"> {value} </div>
@@ -41,7 +45,7 @@ export function OpenConfig() {
         ))
       ) : (
         <div className="flex flex-row items-center justify-center">
-          <div>{preferenceFocusTime} minutes</div>
+          <div>{preferenceTime} minutes</div>
           <IconArrowDown width={20} height={20} color="white" />
         </div>
       )}

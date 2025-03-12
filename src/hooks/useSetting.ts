@@ -2,14 +2,19 @@
 import { useState, useEffect } from "react";
 
 export function useSetting() {
-    const storedPreferenceTime: number = parseInt(localStorage.getItem('preferenceTime') || '0', 10);
-    const [preferenceFocusTime, setPreferenceFocusTime] = useState(storedPreferenceTime);
-    const [preferenceRestTime, setPreferenceRestTime] = useState(0);
+    const storedPreferenceFocusTime: number = parseInt(localStorage.getItem('preferenceFocusTime') || '0', 10);
+    const storedPreferenceRestTime: number = parseInt(localStorage.getItem('preferenceRestTime') || '0', 10);
+    const [preferenceFocusTime, setPreferenceFocusTime] = useState(storedPreferenceFocusTime);
+    const [preferenceRestTime, setPreferenceRestTime] = useState(storedPreferenceRestTime);
    
     
     useEffect(() => {
-        localStorage.setItem('preferenceTime', preferenceFocusTime.toString());
+        localStorage.setItem('preferenceFocusTime', preferenceFocusTime.toString());
       }, [preferenceFocusTime]);
+
+      useEffect(() => {
+        localStorage.setItem('preferenceRestTime', preferenceRestTime.toString());
+      }, [preferenceRestTime]);
 
     return {
         preferenceFocusTime,
