@@ -1,25 +1,22 @@
 import { useState } from "react";
 import { IconArrowDown } from "../../icons/IconArrowDown";
-import clsx from "clsx";
-
 
 interface Props {
   optionSetting: { [key: number]: string };
   setPreference: React.Dispatch<React.SetStateAction<number>>;
-  preferenceTime : number;
+  preferenceTime: number;
 }
 
-export function OpenConfig({optionSetting, setPreference, preferenceTime}: Props) {
-  
+export function OpenConfig({
+  optionSetting,
+  setPreference,
+  preferenceTime,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
-
 
   return (
     <div
-      className={clsx(
-        "flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs ",
-        !isOpen && "hover:bg-card"
-      )}
+      className={`flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs ${!isOpen && "hover:bg-card"}`}
       onClick={() => setIsOpen(!isOpen)}
     >
       {isOpen ? (
@@ -30,17 +27,18 @@ export function OpenConfig({optionSetting, setPreference, preferenceTime}: Props
             className="h-8 w-full cursor-pointer p-1"
           >
             {parseInt(value, 10) == preferenceTime ? (
-              <div className="bg-card flex h-full w-full items-center justify-start rounded-sm ">
-                <div className="w-1 h-[60%] bg-primary rounded-sm "/>
-                <div className="w-full flex items-center justify-center"> {value} </div>
-                
+              <div className="bg-card flex h-full w-full items-center justify-start rounded-sm">
+                <div className="bg-primary h-[60%] w-1 rounded-sm" />
+                <div className="flex w-full items-center justify-center">
+                  {" "}
+                  {value}{" "}
+                </div>
               </div>
             ) : (
               <div className="hover:bg-card flex h-full w-full items-center justify-center hover:rounded-sm">
                 {value}
               </div>
-            ) }
-            
+            )}
           </div>
         ))
       ) : (

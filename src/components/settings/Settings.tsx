@@ -8,7 +8,12 @@ import { optionsRestTime } from "../../config/pomoclock";
 
 function Settings() {
   const [openFocus, setOpenFocus] = useState(false);
-  const { setPreferenceFocusTime, preferenceFocusTime, preferenceRestTime, setPreferenceRestTime } = useSettingContext();
+  const {
+    setPreferenceFocusTime,
+    preferenceFocusTime,
+    preferenceRestTime,
+    setPreferenceRestTime,
+  } = useSettingContext();
 
   return (
     <ContainerSection>
@@ -47,13 +52,21 @@ function Settings() {
                 <div className="bg-card mb-1 flex h-[50%] w-full items-center rounded-sm pl-10 text-sm text-white">
                   <div className="w-1/3">Periodo de Enfoque</div>
                   <div className="m-10 flex w-full items-center justify-end">
-                    <OpenConfig optionSetting={optionsRestTime} preferenceTime={preferenceRestTime} setPreference={setPreferenceRestTime}></OpenConfig>
+                    <OpenConfig
+                      optionSetting={optionsRestTime}
+                      preferenceTime={preferenceRestTime}
+                      setPreference={setPreferenceRestTime}
+                    ></OpenConfig>
                   </div>
                 </div>
                 <div className="bg-card flex h-[50%] w-full items-center rounded-sm pl-10 text-sm text-white">
                   <div className="w-1/3">Periodo de Descanso</div>
                   <div className="m-10 flex w-full items-center justify-end">
-                    <OpenConfig optionSetting={optionsFocusTime} preferenceTime={preferenceFocusTime} setPreference={setPreferenceFocusTime}></OpenConfig>
+                    <OpenConfig
+                      optionSetting={optionsFocusTime}
+                      preferenceTime={preferenceFocusTime}
+                      setPreference={setPreferenceFocusTime}
+                    ></OpenConfig>
                   </div>
                 </div>
               </div>
