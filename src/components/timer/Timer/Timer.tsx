@@ -22,7 +22,7 @@ function Timer({ seconds }: PropTimer) {
   };
 
   useEffect(() => {
-    if (timeLeft <= 0 || pause) return; // Detiene el timer en 0
+    if (timeLeft <= 0 || pause) return;
     if (!init) {
       setInit(true);
     }
@@ -30,13 +30,14 @@ function Timer({ seconds }: PropTimer) {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer); // Limpieza al desmontar
+    return () => clearInterval(timer);
   }, [timeLeft, pause, init]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+    const hours = Math.floor(minutes / 60);
+    return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (

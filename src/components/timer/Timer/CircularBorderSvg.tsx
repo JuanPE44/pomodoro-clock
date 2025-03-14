@@ -20,7 +20,7 @@ const CircularBorderSVG = ({ timeLeft, seconds, init }: Props) => {
         cy="60"
         r={radius}
         className="stroke-neutral-700"
-        strokeWidth="10"
+        strokeWidth="8"
         fill="none"
       />
 
@@ -29,7 +29,7 @@ const CircularBorderSVG = ({ timeLeft, seconds, init }: Props) => {
         cy="60"
         r={radius}
         className={!init ? "stroke-neutral-700" : "stroke-primary"}
-        strokeWidth="10"
+        strokeWidth="8"
         fill="none"
         strokeDasharray={strokeDasharray}
         strokeDashoffset={strokeDashoffset}
