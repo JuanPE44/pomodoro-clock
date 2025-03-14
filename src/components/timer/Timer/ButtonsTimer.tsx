@@ -4,22 +4,12 @@ import { IconPlayPomo } from "../../../icons/IconPlayPomo";
 
 interface Props {
   pause: boolean;
-  setPause: React.Dispatch<React.SetStateAction<boolean>>;
+  handlePause: () => void;
 }
 
-function ButtonsTimer({ pause, setPause }: Props) {
-  const handlePause = () => {
-    setPause((prev) => {
-      if (prev) {
-        //startTimer();
-      } else {
-        //stopTimer();
-      }
-      return !prev;
-    });
-  };
+function ButtonsTimer({ pause, handlePause }: Props) {
   return (
-    <div className="flex flex-row items-center justify-center gap-2">
+    <div className="mb-4 flex flex-row items-center justify-center gap-2">
       <button
         className="bg-primary flex cursor-pointer items-center justify-center rounded-full p-2 text-black transition duration-200 ease-in-out hover:scale-105"
         onClick={() => handlePause()}
