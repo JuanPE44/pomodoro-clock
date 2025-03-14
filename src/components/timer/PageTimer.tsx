@@ -10,7 +10,7 @@ export function PageTimer() {
         <Timer seconds={60} />
         <Timer seconds={60} />
       </div>
-      <Icon name="timer" />
+      <Icon name="timer" size={20} />
     </ContainerSection>
   );
 }
