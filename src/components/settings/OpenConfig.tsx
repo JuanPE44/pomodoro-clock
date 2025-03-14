@@ -30,8 +30,7 @@ export function OpenConfig({
               <div className="bg-card flex h-full w-full items-center justify-start rounded-sm">
                 <div className="bg-primary h-[60%] w-1 rounded-sm" />
                 <div className="flex w-full items-center justify-center">
-                  {" "}
-                  {value}{" "}
+                  {value}
                 </div>
               </div>
             ) : (
