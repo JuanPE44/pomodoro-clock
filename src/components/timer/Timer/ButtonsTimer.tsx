@@ -1,6 +1,4 @@
-import { IconBack } from "../../../icons/IconBack";
-import { IconPausePomo } from "../../../icons/IconPausePomo";
-import { IconPlayPomo } from "../../../icons/IconPlayPomo";
+import Icon from "../../../icons/Icon";
 
 interface Props {
   pause: boolean;
@@ -14,14 +12,10 @@ function ButtonsTimer({ pause, handlePause }: Props) {
         className="bg-primary flex cursor-pointer items-center justify-center rounded-full p-2 text-black transition duration-200 ease-in-out hover:scale-105"
         onClick={() => handlePause()}
       >
-        {pause ? (
-          <IconPlayPomo width={15} height={15} color="black" />
-        ) : (
-          <IconPausePomo width={15} height={15} color="black" />
-        )}
+        {pause ? <Icon name="playPomo" /> : <Icon name="pausePomo" />}
       </button>
       <button className="bg-pomodoro flex cursor-pointer items-center justify-center rounded-full p-2 transition duration-200 ease-in-out hover:scale-105">
-        <IconBack width={15} height={15} color="#fff" />
+        <Icon name="back" />
       </button>
     </div>
   );

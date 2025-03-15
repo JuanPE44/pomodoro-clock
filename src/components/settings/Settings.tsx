@@ -1,10 +1,10 @@
-import { IconFocusSessions } from "../../icons/IconFocusSession";
 import ContainerSection from "../ui/ContainerSection";
 import { useState } from "react";
 import { useSettingContext } from "../../hooks/useSettingContext";
 import { OpenConfig } from "./OpenConfig";
 import { optionsFocusTime } from "../../config/pomoclock";
 import { optionsRestTime } from "../../config/pomoclock";
+import Icon from "../../icons/Icon";
 
 function Settings() {
   const [openFocus, setOpenFocus] = useState(false);
@@ -37,7 +37,7 @@ function Settings() {
               className="bg-card flex h-[40%] w-full flex-row items-center rounded-sm p-3"
               onClick={() => setOpenFocus(!openFocus)}
             >
-              <IconFocusSessions width={20} height={20} color="white" />
+              <Icon name="focusSessions" size={20} />
               <div className="m-3 flex flex-col">
                 <h3 className="text-sm text-white">Periodo de Concentracion</h3>
                 <p className="text-xs text-white">

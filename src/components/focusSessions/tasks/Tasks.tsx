@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { IconPlus } from "../../../icons/IconPlus";
-import { IconTasks } from "../../../icons/IconTasks";
 import { Card } from "../../ui/Card";
 import DropdownMenu from "../../ui/DropdownMenu";
+import Icon from "../../../icons/Icon";
 
 interface TypeTask {
   id: number;
@@ -41,7 +40,7 @@ export function Tasks() {
     <Card className="min-h-60">
       <header className="flex w-full items-center justify-between">
         <div className="flex items-center gap-0.5">
-          <IconTasks color="var(--color-task)" />
+          <Icon name="task" color="var(--color-task)" />
           <span className="font-semibold">Tasks</span>
         </div>
         <div className="flex items-center gap-1">
@@ -49,7 +48,7 @@ export function Tasks() {
             className="cursor-pointer rounded-sm p-1 hover:bg-neutral-700"
             onClick={() => setIsFocus(!isFocus)}
           >
-            <IconPlus />
+            <Icon name="plus" />
           </div>
           <DropdownMenu>
             <li className="rounded-sm px-2 hover:bg-[#18181844]">Opciones</li>
@@ -68,7 +67,7 @@ export function Tasks() {
             className="curson-pointer flex items-center gap-1 rounded-sm bg-neutral-700 px-3 py-1"
             onClick={() => setIsFocus(!isFocus)}
           >
-            <IconPlus />
+            <Icon name="plus" />
             <span>Add task</span>
           </button>
         </div>

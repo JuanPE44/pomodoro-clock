@@ -1,8 +1,5 @@
 import { CANT_LINES, DEGREE_DIFFERENCE } from "../../../config/pomoclock";
-import { IconBack } from "../../../icons/IconBack";
-import { IconPausePomo } from "../../../icons/IconPausePomo";
-import { IconPlayPomo } from "../../../icons/IconPlayPomo";
-import { IconSetting } from "../../../icons/IconSetting";
+import Icon from "../../../icons/Icon";
 
 export function PomoClock({
   time,
@@ -68,9 +65,9 @@ export function PomoClock({
             }}
           >
             {pause ? (
-              <IconPlayPomo width={15} height={15} color="black" />
+              <Icon name="playPomo" color="#000" />
             ) : (
-              <IconPausePomo width={15} height={15} color="black" />
+              <Icon name="pausePomo" color="#000" />
             )}
           </button>
           {pause && (
@@ -83,11 +80,11 @@ export function PomoClock({
                 stopTimer();
               }}
             >
-              <IconBack width={15} height={15} color="#fff" />
+              <Icon name="back" />
             </button>
           )}
           <button className="bg-pomodoro flex cursor-pointer items-center justify-center rounded-full p-2 transition duration-200 ease-in-out hover:scale-105">
-            <IconSetting width={15} height={15} color="#fff" />
+            <Icon name="menu" size={15} color="#fff" />
           </button>
         </div>
         {pause && <p className="py-3 text-xs text-neutral-300">Paused</p>}

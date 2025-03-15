@@ -1,7 +1,43 @@
-import { SvgTimer } from "./svgs";
+import {
+  SvgAlarm,
+  SvgArrowDown,
+  SvgArrowUp,
+  SvgBack,
+  SvgClock,
+  SvgFocusSessions,
+  SvgMenu,
+  SvgNext,
+  SvgPause,
+  SvgPausePomo,
+  SvgPlay,
+  SvgPlayPomo,
+  SvgPlus,
+  SvgSettings,
+  SvgStopWatch,
+  SvgTask,
+  SvgTimer,
+  SvgWorld,
+} from "./Svgs";
 
 export const icons = {
   timer: SvgTimer,
+  alarm: SvgAlarm,
+  clock: SvgClock,
+  pause: SvgPause,
+  menu: SvgMenu,
+  settings: SvgSettings,
+  pausePomo: SvgPausePomo,
+  stopWatch: SvgStopWatch,
+  play: SvgPlay,
+  playPomo: SvgPlayPomo,
+  next: SvgNext,
+  back: SvgBack,
+  task: SvgTask,
+  focusSessions: SvgFocusSessions,
+  arrowDown: SvgArrowDown,
+  arrowUp: SvgArrowUp,
+  world: SvgWorld,
+  plus: SvgPlus,
 } as const;
 
 export type IconName = keyof typeof icons;

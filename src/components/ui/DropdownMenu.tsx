@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconMenu } from "../../icons/IconMenu";
+import Icon from "../../icons/Icon";
 
 interface Props {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export default function DropdownMenu({ children }: Props) {
         className="cursor-pointer rounded-sm p-1 hover:bg-neutral-700"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <IconMenu />
+        <Icon name="menu" size={20} />
       </div>
       <ul
         className={`absolute top-8 -right-8 flex-col gap-2 rounded-md bg-neutral-700 p-1 ${

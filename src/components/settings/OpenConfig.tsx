@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IconArrowDown } from "../../icons/IconArrowDown";
+import Icon from "../../icons/Icon";
 
 interface Props {
   optionSetting: { [key: number]: string };
@@ -43,7 +43,7 @@ export function OpenConfig({
       ) : (
         <div className="flex flex-row items-center justify-center">
           <div>{preferenceTime} minutes</div>
-          <IconArrowDown width={20} height={20} color="white" />
+          <Icon name="arrowDown" size={20} />
         </div>
       )}
     </div>

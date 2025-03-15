@@ -1,5 +1,4 @@
-import { IconArrowDown } from "../../../icons/IconArrowDown";
-import { IconArrowUp } from "../../../icons/IconArrowUp";
+import Icon from "../../../icons/Icon";
 
 export function PomoSettings({
   time,
@@ -33,13 +32,13 @@ export function PomoSettings({
               onClick={() => modifyTime("+")}
               className="flex h-1/2 w-full items-center justify-center border-b border-l border-[#5c5c5c] p-3 text-white hover:bg-[#5c5c5c] hover:opacity-40"
             >
-              <IconArrowUp />
+              <Icon name="arrowUp" />
             </button>
             <button
               onClick={() => modifyTime("-")}
               className="flex h-1/2 w-full items-center justify-center border-l border-[#5c5c5c] p-3 text-white hover:bg-[#5c5c5c] hover:opacity-40"
             >
-              <IconArrowDown />
+              <Icon name="arrowDown" />
             </button>
           </div>
         </div>

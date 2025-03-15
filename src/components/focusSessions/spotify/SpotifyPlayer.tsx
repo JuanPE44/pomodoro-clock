@@ -1,7 +1,5 @@
 import { useSpotifyPlayer } from "../../../hooks/useSpotifyPlayer";
-import { IconNext } from "../../../icons/IconNext";
-import { IconPause } from "../../../icons/IconPause";
-import { IconPlay } from "../../../icons/IconPlay";
+import Icon from "../../../icons/Icon";
 import { IconSpotify } from "../../../icons/IconSpotify";
 import { Spinner } from "../../ui/Spinner";
 
@@ -74,17 +72,17 @@ const SpotifyPlayer: React.FC<SpotifyPlayerProps> = ({ token }) => {
                   className="rotate-y-180 cursor-pointer"
                   onClick={previousTrack}
                 >
-                  <IconNext width={15} height={15} />
+                  <Icon name="next" />
                 </button>
                 <button onClick={togglePlay} className="cursor-pointer">
                   {isPlaying ? (
-                    <IconPause width={18} height={18} />
+                    <Icon name="pause" size={18} />
                   ) : (
-                    <IconPlay width={18} height={18} />
+                    <Icon name="play" size={18} />
                   )}
                 </button>
                 <button className="cursor-pointer" onClick={nextTrack}>
-                  <IconNext width={15} height={15} />
+                  <Icon name="next" />
                 </button>
               </div>
             </div>

@@ -1,26 +1,18 @@
-import { IconConfig } from "../../icons/IconConfig";
-import { IconFocus } from "../../icons/IconFocus";
-import { ROUTES } from "../../config/routesConfig";
 import NavBarLink from "./NavBarLink";
-import { IconTimer } from "../../icons/IconTimer";
-import { IconAlarm } from "../../icons/IconAlarm";
-import { IconStopWatch } from "../../icons/IconStopWatch";
-import { IconWorld } from "../../icons/IconWorld";
-import { IconCLock } from "../../icons/IconClock";
+import Icon from "../../icons/Icon";
 import { useCurrentSection } from "../../hooks/useCurrentSection";
+import { ROUTES } from "../../config/routesConfig";
 
-export function NavBar () {
-
+export function NavBar() {
   const { currentSection } = useCurrentSection();
 
-
   return (
-    <header className="h-creen flex flex-col justify-between bg-neutral-900 p-1 ">
+    <header className="h-creen flex flex-col justify-between bg-neutral-900 p-1">
       <ul className="flex flex-col gap-2">
         {/* este codio se puede mejorar con un map */}
-        <li className="flex gap-1 items-center pl-3">
-          <IconCLock />
-          <h1 className=" py-1 text-xs font-bold text-primary">
+        <li className="flex items-center gap-1 pl-3">
+          <Icon name="clock" />
+          <h1 className="text-primary py-1 text-xs font-bold">
             Pomodoro Clock
           </h1>
         </li>
@@ -29,7 +21,7 @@ export function NavBar () {
             text="Focus session"
             url={ROUTES.HOME}
             current={currentSection && currentSection.path === ROUTES.HOME}
-            children={<IconFocus />}
+            children={<Icon name="focusSessions" />}
           />
         </li>
         <li>
@@ -37,7 +29,7 @@ export function NavBar () {
             text="Timer"
             url={ROUTES.TIMER}
             current={currentSection && currentSection.path === ROUTES.TIMER}
-            children={<IconTimer />}
+            children={<Icon name="timer" />}
           />
         </li>
         <li>
@@ -45,25 +37,27 @@ export function NavBar () {
             text="Alarm"
             url={ROUTES.ALARM}
             current={currentSection && currentSection.path === ROUTES.ALARM}
-
-            children={<IconAlarm />}
+            children={<Icon name="alarm" />}
           />
         </li>
         <li>
           <NavBarLink
             text="Stopwatch"
             url={ROUTES.STOP_WATCH}
-            current={currentSection && currentSection.path === ROUTES.STOP_WATCH}
-
-            children={<IconStopWatch />}
+            current={
+              currentSection && currentSection.path === ROUTES.STOP_WATCH
+            }
+            children={<Icon name="stopWatch" />}
           />
         </li>
         <li>
           <NavBarLink
             text="World Clock"
-            current={currentSection && currentSection.path === ROUTES.WORLD_CLOCK}
+            current={
+              currentSection && currentSection.path === ROUTES.WORLD_CLOCK
+            }
             url={ROUTES.WORLD_CLOCK}
-            children={<IconWorld />}
+            children={<Icon name="world" />}
           />
         </li>
       </ul>
@@ -73,7 +67,7 @@ export function NavBar () {
             text="Settings"
             url={ROUTES.SETTINGS}
             current={currentSection && currentSection.path === ROUTES.SETTINGS}
-            children={<IconConfig />}
+            children={<Icon name="settings" />}
           />
         </li>
       </ul>
