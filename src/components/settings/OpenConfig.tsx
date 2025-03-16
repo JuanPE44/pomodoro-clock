@@ -16,7 +16,7 @@ export function OpenConfig({
 
   return (
     <div
-      className={`flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs ${!isOpen && "hover:bg-card"}`}
+      className={`absolute z-20 flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs ${!isOpen && "hover:bg-card"}`}
       onClick={() => setIsOpen(!isOpen)}
     >
       {isOpen ? (
