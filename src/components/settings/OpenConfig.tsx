@@ -17,7 +17,7 @@ export function OpenConfig({optionSetting, setPreference, preferenceTime}: Props
   return (
     <div
       className={clsx(
-        "flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs ",
+        "flex min-h-8 w-30 flex-col items-center justify-center overflow-hidden rounded-sm border-white bg-[#2a2a2ab5] shadow-xs absolute z-20 ",
         !isOpen && "hover:bg-card"
       )}
       onClick={() => setIsOpen(!isOpen)}

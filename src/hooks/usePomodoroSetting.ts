@@ -7,11 +7,12 @@ export function usePomodoroSetting() {
   const {preferenceFocusTime} = useSettingContext();
   const [time, setTime] = useState(preferenceFocusTime);
   const [startTime, setStartTime] = useState(MIN_TIME);
-  const intervalRef = useRef<number | null>(null);
   const [inSesion, setInSesion] = useState(false);
   const [pause, setPause] = useState(false);
-  const intervalClockHands = useRef<number | null>(null);
   const [handsClockIndex, setHandsClockIndex] = useState(0);
+  const intervalRef = useRef<number | null>(null);
+  const intervalClockHands = useRef<number | null>(null);
+  
 
   useEffect(() => { 
     if (!inSesion) {
@@ -30,7 +31,6 @@ export function usePomodoroSetting() {
       setHandsClockIndex(0); 
     }
   }, [inSesion]);
-
 
 
   useEffect(() => {
@@ -62,6 +62,7 @@ export function usePomodoroSetting() {
           reproducirAlarma();
           clearInterval(intervalRef.current);
           clearInterval(intervalClockHands.current);
+          setTime(startTime)
           intervalRef.current = null;
           setInSesion(false);
           return 0;
