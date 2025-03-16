@@ -7,11 +7,13 @@ interface FocusSesionsContextType {
   setPause: React.Dispatch<React.SetStateAction<boolean>>;
   setInSesion: React.Dispatch<React.SetStateAction<boolean>>;
   setTime: React.Dispatch<React.SetStateAction<number>>;
+  handlePauseChange: () => void;
   handsClockIndex: number;
   startTime: number;
   time: number;
   inSesion: boolean;
   pause: boolean;
+  withPause: boolean;
 }
 
 // Creamos el contexto con valores por defecto

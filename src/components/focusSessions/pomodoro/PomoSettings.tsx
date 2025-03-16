@@ -2,12 +2,16 @@ import Icon from "../../../icons/Icon";
 
 export function PomoSettings({
   time,
+  withPause,
   modifyTime,
   startTimer,
+  handlePauseChange,
 }: {
   time: number;
+  withPause: boolean;
   modifyTime: (operator: string) => void;
   startTimer: () => void;
+  handlePauseChange: () => void;
 }) {
   return (
     <>
@@ -42,6 +46,15 @@ export function PomoSettings({
             </button>
           </div>
         </div>
+        <label className="flex justify-center items-center">
+        <input
+          type="checkbox"
+          checked={withPause}
+          onChange={handlePauseChange}
+          className="custom-checkbox mr-2"
+        />
+        Marcar esta casilla
+      </label>
         <div className="flex w-full items-center justify-center p-10">
           <button
             onClick={startTimer}

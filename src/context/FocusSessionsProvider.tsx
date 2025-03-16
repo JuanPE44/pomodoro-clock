@@ -13,11 +13,13 @@ export const FocusSessionsProvider = ({ children }: Props) => {
     setPause,
     setInSesion,
     setTime,
+    handlePauseChange,
     handsClockIndex,
     startTime,
     time,
     inSesion,
     pause,
+    withPause,
   } = usePomodoroSetting();
   return (
     <FocusSessionsContext.Provider
@@ -27,12 +29,14 @@ export const FocusSessionsProvider = ({ children }: Props) => {
         inSesion,
         pause,
         handsClockIndex,
+        withPause,
         setTime,
         startTimer,
         stopTimer,
         modifyTime,
         setPause,
         setInSesion,
+        handlePauseChange
       }}
     >
       {children}

@@ -97,3 +97,21 @@ input[type="checkbox"]:checked::before {
   font-weight: bold;
   color: #222;
 }
+
+/* Estilos para el checkbox personalizado del pomoCloc */
+
+input.custom-checkbox {
+  
+  border-radius: 20%; 
+  background-color: transparent; 
+  border: 2px solid var(--color-gray-light); 
+}
+
+input.custom-checkbox:checked {
+  background-color: var(--color-primary); 
+  border: 2px solid #f0efef7a; 
+}
+
+input.custom-checkbox:checked::before {
+  content: "\2713"; 
+}

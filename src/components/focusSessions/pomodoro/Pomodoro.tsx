@@ -11,10 +11,12 @@ export function Pomodoro() {
     setPause,
     setInSesion,
     setTime,
+    handlePauseChange,
     handsClockIndex,
     startTime,
     time,
     inSesion,
+    withPause,
     pause,
   } = useFocusSessionsContext();
 
@@ -39,8 +41,10 @@ export function Pomodoro() {
         ) : (
           <PomoSettings
             time={time}
+            withPause={withPause}
             modifyTime={modifyTime}
             startTimer={startTimer}
+            handlePauseChange={handlePauseChange}
           />
         )}
       </div>
