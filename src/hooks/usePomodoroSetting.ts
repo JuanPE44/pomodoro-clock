@@ -57,6 +57,8 @@ export function usePomodoroSetting() {
     countDown(startTime); // Iniciar el conteo visual del reloj
     console.log("El startTime es", startTime);
   
+    let pauseExecuted = false;
+    
     const tick = () => {
       setTime((prevTime) => {
         if (prevTime <= 1) {
@@ -70,19 +72,19 @@ export function usePomodoroSetting() {
         }
   
         // **Pausa sin recursividad**
-        if (withPause && (prevTime - 1)  === Math.ceil(startTime / 2)) {
+        if (withPause && !pauseExecuted &&(prevTime - 1)  === Math.ceil(startTime / 2)) {
           console.log("Pausa iniciada por", breakTime, "minutos");
           setPause(true);
           clearInterval(intervalRef.current);
           clearInterval(intervalClockHands.current);
-          intervalRef.current = null;
-          intervalBreak.current = null;
+          pauseExecuted = true;
+         
   
           // Reactivar el temporizador sin reiniciar la función
           intervalBreak.current = setTimeout(() => {
             console.log("Fin de la pausa, continuando el temporizador...");
             setPause(false);
-            setWithPause(false);
+            
             console.log("after pause",handsClockIndex)
             countDown(startTime);
            
