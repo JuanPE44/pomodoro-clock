@@ -14,6 +14,7 @@ interface FocusSesionsContextType {
   inSesion: boolean;
   pause: boolean;
   withPause: boolean;
+  inBreak: boolean;
 }
 
 // Creamos el contexto con valores por defecto

@@ -4,13 +4,13 @@ import { CANT_LINES, MAX_TIME, MIN_TIME } from "../config/pomoclock";
 import { useSettingContext } from "./useSettingContext";
 
 export function usePomodoroSetting() {
-  const { preferenceFocusTime } = useSettingContext();
+  const { preferenceFocusTime, preferenceRestTime } = useSettingContext();
   const [time, setTime] = useState(preferenceFocusTime);
   const [startTime, setStartTime] = useState(MIN_TIME);
   const [inSesion, setInSesion] = useState(false);
   const [inBreak, setInBreak] = useState(false);
   const [pause, setPause] = useState(false);
-  const [breakTime, setBreakTime] = useState(1);
+  const [breakTime, setBreakTime] = useState(preferenceRestTime);
   const [withPause, setWithPause] = useState(false);
   const [handsClockIndex, setHandsClockIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
@@ -75,28 +75,30 @@ export function usePomodoroSetting() {
         if (withPause && !pauseExecuted &&(prevTime - 1)  === Math.ceil(startTime / 2)) {
           console.log("Pausa iniciada por", breakTime, "minutos");
           setPause(true);
+          setInBreak(true)
           clearInterval(intervalRef.current);
           clearInterval(intervalClockHands.current);
           pauseExecuted = true;
          
   
-          // Reactivar el temporizador sin reiniciar la función
+          
           intervalBreak.current = setTimeout(() => {
             console.log("Fin de la pausa, continuando el temporizador...");
             setPause(false);
+            setInBreak(false)
             
             console.log("after pause",handsClockIndex)
             countDown(startTime);
            
 
-            intervalRef.current = setInterval(tick, 60000); // Reanudar sin llamar a startTimer()
+            intervalRef.current = setInterval(tick, 60000); 
             intervalBreak.current = null;
           }, breakTime * 60000);
   
-          return prevTime; // Mantener el tiempo congelado durante la pausa
+          return prevTime; 
         }
   
-        return prevTime - 1; // Decrementar el tiempo normalmente
+        return prevTime - 1; 
       });
     };
   
@@ -131,8 +133,8 @@ export function usePomodoroSetting() {
     if (intervalRef.current) return;
 
     if (time < MAX_TIME && operator === "+") {
-      setTime(time + 1);
-    } else if (time > 0 && operator === "-") {
+      setTime(time + 5);
+    } else if (time > MIN_TIME && operator === "-") {
       setTime(time - 5);
     }
   };
@@ -149,6 +151,7 @@ export function usePomodoroSetting() {
     setInSesion,
     setTime,
     handlePauseChange,
+    inBreak,
     startTime,
     handsClockIndex,
     time,

@@ -53,7 +53,7 @@ export function PomoSettings({
           onChange={handlePauseChange}
           className="custom-checkbox mr-2"
         />
-        Marcar esta casilla
+        Activar Descansos
       </label>
         <div className="flex w-full items-center justify-center p-10">
           <button

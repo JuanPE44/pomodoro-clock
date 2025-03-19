@@ -18,6 +18,7 @@ export function Pomodoro() {
     inSesion,
     withPause,
     pause,
+    inBreak
   } = useFocusSessionsContext();
 
   return (
@@ -31,12 +32,14 @@ export function Pomodoro() {
             time={time}
             startTime={startTime}
             pause={pause}
+            handsClockIndex={handsClockIndex}
+            inBreak={inBreak}
             setPause={setPause}
             setInSesion={setInSesion}
             setTime={setTime}
-            handsClockIndex={handsClockIndex}
             startTimer={startTimer}
             stopTimer={stopTimer}
+            
           />
         ) : (
           <PomoSettings
