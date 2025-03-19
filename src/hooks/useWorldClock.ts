@@ -6,6 +6,7 @@ export function useWorldClock(){
     
 
     async function obtenerHora(zona: string) {
+        console.log("llego esto", zona)
         try {
           const apiKey = "EGDDNKPNY1FX";
           const url = `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=zone&zone=${zona}`;
